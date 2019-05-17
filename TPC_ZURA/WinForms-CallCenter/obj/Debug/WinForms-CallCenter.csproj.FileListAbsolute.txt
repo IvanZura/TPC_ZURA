@@ -38,3 +38,4 @@ C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinFor
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ReclamosCrear.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ReclamosListado.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.UsuariosListado.resources
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.UsuariosAlta.resources

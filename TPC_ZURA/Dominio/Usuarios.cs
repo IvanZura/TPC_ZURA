@@ -11,6 +11,7 @@ namespace Dominio
         public int id { get; set; }
         public string usuario { get; set; }
         public TipoUsuario tipo { get; set; }
+        public bool activo { get; set; }
 
         /*public Usuarios (int ID, int IDPersona, string Nombre,
             string Apellido, string Usuario, int Tipo, string NombreTipo,

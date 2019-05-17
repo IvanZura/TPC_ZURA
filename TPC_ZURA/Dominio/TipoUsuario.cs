@@ -16,5 +16,10 @@ namespace Dominio
             this.tipo = Tipo;
             this.nombre = Nombre;
         }
+
+        public override string ToString()
+        {
+            return this.nombre;
+        }
     }
 }

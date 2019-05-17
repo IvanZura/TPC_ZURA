@@ -47,8 +47,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvClientes);
             this.Name = "ClientesListado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ClientesListado";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ClientesListado_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);

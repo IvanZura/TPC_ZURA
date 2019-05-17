@@ -132,8 +132,8 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Name = "ReclamosCrear";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReclamosCrear";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
             this.PerformLayout();
 

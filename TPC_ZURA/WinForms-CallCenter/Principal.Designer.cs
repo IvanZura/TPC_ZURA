@@ -43,7 +43,10 @@
             this.asignarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.spbCarga = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -72,14 +75,14 @@
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -94,7 +97,7 @@
             // listadoToolStripMenuItem
             // 
             this.listadoToolStripMenuItem.Name = "listadoToolStripMenuItem";
-            this.listadoToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.listadoToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.listadoToolStripMenuItem.Text = "Listado";
             this.listadoToolStripMenuItem.Click += new System.EventHandler(this.listadoToolStripMenuItem_Click);
             // 
@@ -109,7 +112,7 @@
             // listadoToolStripMenuItem3
             // 
             this.listadoToolStripMenuItem3.Name = "listadoToolStripMenuItem3";
-            this.listadoToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.listadoToolStripMenuItem3.Size = new System.Drawing.Size(112, 22);
             this.listadoToolStripMenuItem3.Text = "Listado";
             this.listadoToolStripMenuItem3.Click += new System.EventHandler(this.listadoToolStripMenuItem3_Click);
             // 
@@ -124,7 +127,7 @@
             // listadoToolStripMenuItem1
             // 
             this.listadoToolStripMenuItem1.Name = "listadoToolStripMenuItem1";
-            this.listadoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.listadoToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.listadoToolStripMenuItem1.Text = "Listado";
             this.listadoToolStripMenuItem1.Click += new System.EventHandler(this.listadoToolStripMenuItem1_Click);
             // 
@@ -142,7 +145,7 @@
             // crearToolStripMenuItem
             // 
             this.crearToolStripMenuItem.Name = "crearToolStripMenuItem";
-            this.crearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.crearToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.crearToolStripMenuItem.Text = "Crear";
             this.crearToolStripMenuItem.Click += new System.EventHandler(this.crearToolStripMenuItem_Click);
             // 
@@ -161,23 +164,40 @@
             // listadoToolStripMenuItem2
             // 
             this.listadoToolStripMenuItem2.Name = "listadoToolStripMenuItem2";
-            this.listadoToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.listadoToolStripMenuItem2.Size = new System.Drawing.Size(125, 22);
             this.listadoToolStripMenuItem2.Text = "Listado";
             this.listadoToolStripMenuItem2.Click += new System.EventHandler(this.listadoToolStripMenuItem2_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spbCarga});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // spbCarga
+            // 
+            this.spbCarga.Name = "spbCarga";
+            this.spbCarga.Size = new System.Drawing.Size(100, 16);
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Call Center - Principal";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,6 +220,8 @@
         private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem empleadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem3;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar spbCarga;
     }
 }
 

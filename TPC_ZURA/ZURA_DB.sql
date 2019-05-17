@@ -1,5 +1,7 @@
 use master
 go
+DROP DATABASE ZURA_DB
+go
 CREATE DATABASE ZURA_DB
 go
 use ZURA_DB
@@ -29,7 +31,8 @@ CREATE TABLE Usuarios (
 	IDPersona	int foreign key references Personas(ID) not null,
 	Usuario	varchar(50) not null,
 	Pass	varchar(50) not null,
-	TipoUsuario	int not null foreign key references TiposUsuarios(ID)
+	TipoUsuario	int not null foreign key references TiposUsuarios(ID),
+	Activo	bit	not null
 )
 
 go
@@ -91,8 +94,8 @@ VALUES ('Ivan', 'Zura', '1995/10/20', 'no@no.com', 1125263598), ('Maxi', 'Sar', 
 
 go
 
-INSERT INTO Usuarios (IDPersona, Usuario, Pass, TipoUsuario)
-VALUES (1, 'izura', '123', 2), (2, 'msar', '123', 4)
+INSERT INTO Usuarios (IDPersona, Usuario, Pass, TipoUsuario, Activo)
+VALUES (1, 'izura', '123', 2, 1), (2, 'msar', '123', 4, 1)
 
 go
 

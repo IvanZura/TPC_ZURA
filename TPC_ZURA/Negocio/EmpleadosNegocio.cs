@@ -34,7 +34,7 @@ namespace Negocio
                     nuevo = new Empleados(
                         lector.GetInt32(0), lector.GetInt32(1), lector.GetInt32(2), lector.GetString(3),
                         lector.GetString(4), lector.GetString(5), lector.GetInt32(6), lector.GetString(7),
-                        lector.GetDateTime(8).ToString(), lector.GetString(9), lector.GetInt32(10)
+                        lector.GetDateTime(8), lector.GetString(9), lector.GetInt32(10)
                     );
 
                     listado.Add(nuevo);

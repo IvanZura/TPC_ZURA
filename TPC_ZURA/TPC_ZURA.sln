@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccesoDatos", "AccesoDatos\AccesoDatos.csproj", "{EF174139-F8D6-4AE6-8097-F6FFBF24D5D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForms-CallCenter", "WebForms-CallCenter\WebForms-CallCenter.csproj", "{4BF49D3B-A159-4807-9AC1-DDFBA53A6261}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{EF174139-F8D6-4AE6-8097-F6FFBF24D5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF174139-F8D6-4AE6-8097-F6FFBF24D5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF174139-F8D6-4AE6-8097-F6FFBF24D5D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BF49D3B-A159-4807-9AC1-DDFBA53A6261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BF49D3B-A159-4807-9AC1-DDFBA53A6261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BF49D3B-A159-4807-9AC1-DDFBA53A6261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BF49D3B-A159-4807-9AC1-DDFBA53A6261}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

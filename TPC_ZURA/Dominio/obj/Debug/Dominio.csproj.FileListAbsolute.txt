@@ -4,3 +4,9 @@ C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\CallCenter-Cuat
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\CallCenter-Cuatrimestral\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\CallCenter-Cuatrimestral\Dominio\obj\Debug\Dominio.dll
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\CallCenter-Cuatrimestral\Dominio\obj\Debug\Dominio.pdb
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\Dominio\bin\Debug\Dominio.dll
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\Dominio\obj\Debug\Dominio.dll
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\Dominio\obj\Debug\Dominio.pdb

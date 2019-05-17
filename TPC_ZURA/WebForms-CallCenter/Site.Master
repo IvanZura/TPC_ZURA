@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebForms_CallCenter.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call-Center</title>
+
+    <link href="~/Content/materialize.min.css" rel="stylesheet" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+
+    <form runat="server">
+
+       
+        <div>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
+            </footer>
+        </div>
+
+    </form>
+    <script src="~/Scripts/materialize.min.js"></script>
+</body>
+</html>

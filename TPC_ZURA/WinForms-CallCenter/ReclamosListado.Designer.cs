@@ -47,8 +47,8 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvReclamos);
             this.Name = "ReclamosListado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ReclamosListado";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.dgvReclamos)).EndInit();
             this.ResumeLayout(false);
 

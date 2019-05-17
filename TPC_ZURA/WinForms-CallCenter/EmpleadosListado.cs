@@ -31,12 +31,26 @@ namespace WinForms_CallCenter
             {
                 this.ListadoEmpleados = negocioEmpleados.ListarEmpleados();
                 dgvEmpleados.DataSource = this.ListadoEmpleados;
+                dgvEmpleados.Columns[0].Visible = false;
+                dgvEmpleados.Columns[1].Visible = false;
+                dgvEmpleados.Columns[2].Visible = false;
+                dgvEmpleados.Columns[4].Visible = false;
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnAlta_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

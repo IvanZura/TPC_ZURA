@@ -12,7 +12,7 @@ namespace Dominio
 
         public Empleados(int IDEmpleado, int ID, int IDPersona, string Nombre,
             string Apellido, string Usuario, int Tipo, string NombreTipo,
-            string fnacimiento, string email, int telefono)
+            DateTime fnacimiento, string email, int telefono)
         {
             this.idempleado = IDEmpleado;
             this.id = ID;

@@ -13,14 +13,19 @@ namespace WinForms_CallCenter
 {
     public partial class Principal : Form
     {
-        EmpleadosListado ListadoEMP = new EmpleadosListado();
-        ClientesListado ListadoCL = new ClientesListado();
-        UsuariosListado ListadoUS = new UsuariosListado();
-        ReclamosListado ListadoRC = new ReclamosListado();
-        ReclamosCrear CrearRC = new ReclamosCrear();
+        EmpleadosListado ListadoEMP;
+        ClientesListado ListadoCL;
+        UsuariosListado ListadoUS;
+        ReclamosListado ListadoRC;
+        ReclamosCrear CrearRC;
         public Principal()
         {
             InitializeComponent();
+            ListadoEMP = new EmpleadosListado();
+            ListadoCL = new ClientesListado();
+            ListadoUS = new UsuariosListado();
+            ListadoRC = new ReclamosListado();
+            CrearRC = new ReclamosCrear();
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -30,56 +35,20 @@ namespace WinForms_CallCenter
 
         private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool abierto = false;
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f.Name == ListadoUS.Name)
-                {
-                    abierto = true;
-                    f.Show();
-                }
-            }
-            if (!abierto)
-            {
-                ListadoUS.MdiParent = this;
-                ListadoUS.Show();
-            }
+            ListadoUS = new UsuariosListado();
+            ListadoUS.Show();
         }
 
         private void listadoToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            bool abierto = false;
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f.Name == ListadoEMP.Name)
-                {
-                    abierto = true;
-                    f.Show();
-                }
-            }
-            if (!abierto)
-            {
-                ListadoEMP.MdiParent = this;
-                ListadoEMP.Show();
-            }
+            ListadoEMP = new EmpleadosListado();
+            ListadoEMP.Show();
         }
 
         private void listadoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            bool abierto = false;
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f.Name == ListadoCL.Name)
-                {
-                    abierto = true;
-                    f.Show();
-                }
-            }
-            if (!abierto)
-            {
-                ListadoCL.MdiParent = this;
-                ListadoCL.Show();
-            }
+            ListadoCL = new ClientesListado();
+            ListadoCL.Show();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,38 +58,14 @@ namespace WinForms_CallCenter
 
         private void listadoToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            bool abierto = false;
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f.Name == ListadoRC.Name)
-                {
-                    abierto = true;
-                    f.Show();
-                }
-            }
-            if (!abierto)
-            {
-                ListadoRC.MdiParent = this;
-                ListadoRC.Show();
-            }
+            ListadoRC = new ReclamosListado();
+            ListadoRC.Show();
         }
 
         private void crearToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool abierto = false;
-            foreach (Form f in Application.OpenForms)
-            {
-                if (f.Name == CrearRC.Name)
-                {
-                    abierto = true;
-                    f.Show();
-                }
-            }
-            if (!abierto)
-            {
-                CrearRC.MdiParent = this;
-                CrearRC.Show();
-            }
+            CrearRC = new ReclamosCrear();
+            CrearRC.Show();
         }
     }
 }

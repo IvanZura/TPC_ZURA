@@ -11,7 +11,7 @@ namespace Dominio
         public int idpersona { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
-        public string fnacimiento { get; set; }
+        public DateTime fnacimiento { get; set; }
         public string email { get; set; }
         public int telefono { get; set; }
     }
