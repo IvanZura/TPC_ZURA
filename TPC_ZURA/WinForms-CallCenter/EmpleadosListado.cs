@@ -34,7 +34,7 @@ namespace WinForms_CallCenter
                 dgvEmpleados.Columns[0].Visible = false;
                 dgvEmpleados.Columns[1].Visible = false;
                 dgvEmpleados.Columns[2].Visible = false;
-                dgvEmpleados.Columns[4].Visible = false;
+                dgvEmpleados.Columns[5].Visible = false;
 
             }
             catch (Exception ex)
@@ -45,12 +45,51 @@ namespace WinForms_CallCenter
 
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            
+            UsuariosAlta alta = new UsuariosAlta();
+            alta.ShowDialog();
+            this.cargarGrilla();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            
+            UsuariosAlta alta = new UsuariosAlta((Usuarios)dgvEmpleados.CurrentRow.DataBoundItem);
+            alta.ShowDialog();
+            this.cargarGrilla();
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == "")
+            {
+                dgvEmpleados.DataSource = ListadoEmpleados;
+            }
+            else
+            {
+                if (txtBuscar.Text.Length >= 3)
+                {
+                    List<Empleados> lista;
+                    lista = ListadoEmpleados.FindAll(X => X.nombre.Contains(txtBuscar.Text) || X.apellido.Contains(txtBuscar.Text));
+                    dgvEmpleados.DataSource = lista;
+                }
+            }
+        }
+
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("¿Seguro?", "Baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                UsuariosNegocio negocio = new UsuariosNegocio();
+                if (negocio.DeleteUsuario((Usuarios)dgvEmpleados.CurrentRow.DataBoundItem))
+                {
+                    MessageBox.Show("Baja correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.cargarGrilla();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
