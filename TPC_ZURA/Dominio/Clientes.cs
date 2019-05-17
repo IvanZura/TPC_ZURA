@@ -12,7 +12,7 @@ namespace Dominio
 
         public Clientes (int IDCliente, int ID, int IDPersona, string Nombre,
             string Apellido, string Usuario, int Tipo, string NombreTipo,
-            DateTime fnacimiento, string email, int telefono)
+            DateTime fnacimiento, string email, int telefono, bool activo)
         {
             this.idcliente = IDCliente;
             this.id = ID;
@@ -24,6 +24,7 @@ namespace Dominio
             this.email = email;
             this.telefono = telefono;
             this.tipo = new TipoUsuario(Tipo, NombreTipo);
+            this.activo = activo;
         }
     }
 }
