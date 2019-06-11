@@ -46,6 +46,7 @@
     <Compile Include="Estados.cs" />
     <Compile Include="Personas.cs" />
     <Compile Include="Prioridad.cs" />
+    <Compile Include="Puestos.cs" />
     <Compile Include="Reclamo.cs" />
     <Compile Include="TipoIncidencia.cs" />
     <Compile Include="TipoUsuario.cs" />

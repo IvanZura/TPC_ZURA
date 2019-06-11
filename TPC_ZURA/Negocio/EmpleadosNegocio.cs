@@ -24,18 +24,32 @@ namespace Negocio
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
                 //MSF-20190420: agregué todos los datos del heroe. Incluso su universo, que lo traigo con join.
-                comando.CommandText = "select emp.id as idempleado, us.id, pr.ID as idpersona, pr.Nombre, pr.Apellido, us.Usuario, us.TipoUsuario as tipo, tius.nombre, pr.FNacimiento, pr.Email, pr.Telefono, us.activo from Empleados as emp inner join Usuarios as us on emp.IDUsuario = us.ID inner join Personas as pr on us.IDPersona = pr.ID inner join TiposUsuarios as tius on us.TipoUsuario = tius.ID where us.activo = 1";
+                comando.CommandText = "select pu.ID as IDPuesto, pu.nombre as nombrePuesto, pu.nombre, emp.ID, emp.IDPersona, emp.IDPuesto, emp.FechaAlta as altaEmpleado, emp.Activo, p.Nombre, p.Apellido, p.FNacimiento, p.Email, p.Telefono, p.DNI, p.FechaAlta as altaPersona from Empleados as emp inner join Personas as p on emp.IDPersona = p.ID inner join Puestos as pu on pu.ID = emp.IDPuesto where emp.activo = 1";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
 
                 while (lector.Read())
                 {
-                    nuevo = new Empleados(
-                        lector.GetInt32(0), lector.GetInt32(1), lector.GetInt32(2), lector.GetString(3),
-                        lector.GetString(4), lector.GetString(5), lector.GetInt32(6), lector.GetString(7),
-                        lector.GetDateTime(8), lector.GetString(9), lector.GetInt32(10), (bool)lector["activo"]
-                    );
+                    nuevo = new Empleados();
+                    nuevo.legajo = (int)lector["ID"];
+                    nuevo.puesto = new Puestos();
+                    nuevo.puesto.id = (int)lector["IDPuesto"];
+                    nuevo.puesto.Nombre = lector["nombrePuesto"].ToString();
+                    nuevo.altaEmpleado = (DateTime)lector["altaEmpleado"];
+                    nuevo.idpersona = (int)lector["IDPersona"];
+                    nuevo.nombre = lector["Nombre"].ToString();
+                    nuevo.apellido = lector["Apellido"].ToString();
+                    nuevo.fnacimiento = (DateTime)lector["FNacimiento"];
+                    nuevo.email = lector["Email"].ToString();
+                    nuevo.telefono = (int)lector["Telefono"];
+                    nuevo.DNI = lector["DNI"].ToString();
+                    nuevo.altaPersona = (DateTime)lector["altaPersona"];
+                    //nuevo = new Empleados(
+                    //    lector.GetInt32(0), lector.GetInt32(1), lector.GetInt32(2), lector.GetString(3),
+                    //    lector.GetString(4), lector.GetString(5), lector.GetInt32(6), lector.GetString(7),
+                    //    lector.GetDateTime(8), lector.GetString(9), lector.GetInt32(10), (bool)lector["activo"]
+                    //);
 
                     listado.Add(nuevo);
                 }
@@ -49,6 +63,132 @@ namespace Negocio
             finally
             {
                 conexion.Close();
+            }
+        }
+        public List<Puestos> ListarPuestos()
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            List<Puestos> listado = new List<Puestos>();
+            Puestos nuevo;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select id, nombre from puestos";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+
+                while (lector.Read())
+                {
+                    //nuevo = new TipoUsuario((int)lector["id"], lector["nombre"].ToString());
+                    nuevo = new Puestos();
+                    nuevo.id = (int)lector["id"];
+                    nuevo.Nombre = lector["nombre"].ToString();
+                    listado.Add(nuevo);
+                }
+                return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        public bool ExisteEmpleado(string DNI)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select * from Empleados as emp inner join Personas as p on emp.IDPersona = p.ID where p.DNI = '"+ DNI +"'";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.HasRows)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+        }
+        public bool InsertarEmpleado (Empleados empleado)
+        {
+            PersonasNegocio negocioP = new PersonasNegocio();
+            int idPersona = 0;
+            if (empleado.idpersona == 0)
+            {
+                idPersona = negocioP.AgregarPersona((Personas)empleado);
+                if (idPersona != 0)
+                {
+                    SqlConnection conexion = new SqlConnection();
+                    SqlCommand comando = new SqlCommand();
+                    SqlDataReader lector;
+
+                    conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                    comando.CommandType = System.Data.CommandType.Text;
+                    comando.CommandText = "insert into empleados (IDPersona, IDPuesto)" +
+                        " values (" + idPersona + "," + empleado.puesto.id + ")";
+                    comando.Connection = conexion;
+                    conexion.Open();
+                    lector = comando.ExecuteReader();
+                    lector.Read();
+                    if (lector.RecordsAffected > 0)
+                    {
+                        return true;
+                    } else
+                    {
+                        return false;
+                    }
+                } else
+                {
+                    return false;
+                }
+            } else
+            {
+                idPersona = empleado.idpersona;
+                SqlConnection conexion = new SqlConnection();
+                SqlCommand comando = new SqlCommand();
+                SqlDataReader lector;
+
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "insert into empleados (IDPersona, IDPuesto)" +
+                    " values (" + idPersona + "," + empleado.puesto.id + ")";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.RecordsAffected > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

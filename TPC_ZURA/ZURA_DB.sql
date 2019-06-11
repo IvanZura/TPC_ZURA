@@ -19,37 +19,52 @@ CREATE TABLE Personas (
 	Nombre	varchar(50) not null,
 	Apellido varchar(50) not null,
 	FNacimiento	date not null,
-	Email	varchar(50) not null,
-	Telefono int not null check(Telefono > 0)
+	Email	varchar(50) null,
+	Telefono int not null check(Telefono > 0),
+	DNI	varchar(8) not null,
+	FechaAlta	date not null default(getdate())
 )
 
 GO
 
+CREATE TABLE Puestos (
+	ID	int primary key not null identity(1, 1),
+	nombre	varchar(30) not null
+)
+
+GO
+
+CREATE TABLE Clientes (
+	ID	int	not null identity(1, 1) primary key,
+	IDPersona	int not null foreign key references Personas(ID),
+	FechaAlta	date not null default(getdate()),
+	Activo bit not null default(1)
+)
+
+GO
+
+CREATE TABLE Empleados (
+	ID	int	not null identity(1, 1) primary key,
+	IDPersona	int not null foreign key references Personas(ID),
+	IDPuesto	int foreign key references Puestos(ID),
+	FechaAlta	date not null default(getdate()),
+	Activo bit not null default(1)
+)
+
+GO
 
 CREATE TABLE Usuarios (
 	ID int primary key identity(1, 1) not null,
-	IDPersona	int foreign key references Personas(ID) not null,
 	Usuario	varchar(50) not null,
 	Pass	varchar(50) not null,
+	FechaAlta	date not null default(getdate()),
 	TipoUsuario	int not null foreign key references TiposUsuarios(ID),
+	IDCliente	int	null,
+	IDEmpleado  int null,
 	Activo	bit	not null
 )
 
-go
-
-CREATE TABLE Clientes (
-	ID	int not null identity(1, 1) primary key,
-	IDUsuario int not null foreign key references Usuarios(ID)
-)
-
-go
-
-CREATE TABLE Empleados (
-	ID	int primary key identity(1, 1) not null,
-	IDUsuario int not null foreign key references Usuarios(ID)
-)
-
-go
+GO
 
 CREATE TABLE TiposIncidencias (
 	ID	int primary key identity(1, 1) not null,
@@ -85,27 +100,32 @@ CREATE TABLE Reclamos (
 go
 
 INSERT INTO TiposUsuarios (Nombre)
-VALUES ('Administrador'), ('Telefonista'), ('Supervisor'), ('Cliente')
+VALUES ('Empleado'), ('Cliente')
 
 go
 
-INSERT INTO Personas (Nombre, Apellido, FNacimiento, Email, Telefono)
-VALUES ('Ivan', 'Zura', '1995/10/20', 'no@no.com', 1125263598), ('Maxi', 'Sar', '01/01/1901', 'prog3@JA.com', 1188888888)
+INSERT INTO Personas (Nombre, Apellido, FNacimiento, Email, Telefono, DNI)
+VALUES ('Ivan', 'Zura', '1995/10/20', 'no@no.com', 1125263598, '39148492'), ('Maxi', 'Sar', '01/01/1901', 'prog3@JA.com', 1188888888, '35123123')
 
 go
 
-INSERT INTO Usuarios (IDPersona, Usuario, Pass, TipoUsuario, Activo)
-VALUES (1, 'izura', '123', 2, 1), (2, 'msar', '123', 4, 1)
+INSERT INTO Puestos (Nombre)
+values ('Administrador'),('Telefonista'),('Supervisor')
 
 go
 
-INSERT INTO Clientes (IDUsuario)
+INSERT INTO Clientes (IDPersona)
 VALUES (2)
 
 go
 
-INSERT INTO Empleados (IDUsuario)
-VALUES (1)
+INSERT INTO Empleados (IDPersona, IDPuesto)
+VALUES (1, 2)
+
+go
+
+INSERT INTO Usuarios (Usuario, Pass, TipoUsuario, IDCliente, IDEmpleado, Activo)
+VALUES ('izura', '123', 1, 0, 1, 1), ('msar', '123', 2, 1, 0, 1)
 
 go
 

@@ -16,16 +16,16 @@ namespace Dominio
         public Usuarios creador { get; set; }
         public Estados estado { get; set; }
 
-        public Reclamo (int ID, Clientes cliente, TipoIncidencia incidencia, Prioridad prioridad,
-            string problematica, Usuarios creador, Estados estado)
-        {
-            this.id = ID;
-            this.cliente = cliente;
-            this.incidencia = incidencia;
-            this.prioridad = prioridad;
-            this.problematica = problematica;
-            this.creador = creador;
-            this.estado = estado;
-        }
+        //public Reclamo (int ID, Clientes cliente, TipoIncidencia incidencia, Prioridad prioridad,
+        //    string problematica, Usuarios creador, Estados estado)
+        //{
+        //    this.id = ID;
+        //    this.cliente = cliente;
+        //    this.incidencia = incidencia;
+        //    this.prioridad = prioridad;
+        //    this.problematica = problematica;
+        //    this.creador = creador;
+        //    this.estado = estado;
+        //}
     }
 }

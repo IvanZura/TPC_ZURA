@@ -11,10 +11,10 @@ namespace Dominio
         public int tipo { get; set; }
         public string nombre { get; set; }
 
-        public Estados (int tipo, string nombre)
-        {
-            this.tipo = tipo;
-            this.nombre = nombre;
-        }
+        //public Estados (int tipo, string nombre)
+        //{
+        //    this.tipo = tipo;
+        //    this.nombre = nombre;
+        //}
     }
 }
