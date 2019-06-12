@@ -17,6 +17,8 @@ namespace WinForms_CallCenter
     {
         Personas local;
         EmpleadosNegocio negocio;
+        bool mod = false;
+        Empleados empleadoMod;
         public EmpleadosAlta()
         {
             negocio = new EmpleadosNegocio();
@@ -24,6 +26,34 @@ namespace WinForms_CallCenter
             cboPuesto.DisplayMember = "Nombre";
             cboPuesto.ValueMember = "id";
             cboPuesto.DataSource = negocio.ListarPuestos();
+        }
+
+        public EmpleadosAlta(Empleados empleado)
+        {
+            this.mod = true;
+            negocio = new EmpleadosNegocio();
+            InitializeComponent();
+            cboPuesto.DisplayMember = "Nombre";
+            cboPuesto.ValueMember = "id";
+            cboPuesto.DataSource = negocio.ListarPuestos();
+            txtDNI.Enabled = false;
+            btnBuscar.Enabled = false;
+            lblResultadoDNI.Text = "Solo algunos campos puede modificar";
+            txtDNI.Text = empleado.DNI;
+            txtNombre.Text = empleado.nombre;
+            txtApellido.Text = empleado.apellido;
+            txtEmail.Text = empleado.email;
+            txtTelefono.Text = empleado.telefono.ToString();
+            dtpNacimiento.Value = empleado.fnacimiento;
+            cboPuesto.SelectedValue = empleado.puesto.id;
+            this.Text = "Modificar Empleado";
+            btnAceptar.Text = "Modificar";
+            txtEmail.Enabled = true;
+            txtTelefono.Enabled = true;
+            cboPuesto.Enabled = true;
+            btnAceptar.Enabled = true;
+            empleadoMod = new Empleados();
+            empleadoMod = empleado;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -107,33 +137,54 @@ namespace WinForms_CallCenter
                 MessageBox.Show("Formato de E-mail inválido", "E-mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            Empleados empleado = new Empleados();
-            if (this.local != null)
+            if (!this.mod)
             {
-                empleado.idpersona = this.local.idpersona;
-                empleado.puesto = new Puestos();
-                empleado.puesto.id = (int)cboPuesto.SelectedValue;
-                empleado.puesto.Nombre = cboPuesto.SelectedText;
+                Empleados empleado = new Empleados();
+                if (this.local != null)
+                {
+                    empleado.idpersona = this.local.idpersona;
+                    empleado.puesto = new Puestos();
+                    empleado.puesto.id = (int)cboPuesto.SelectedValue;
+                    empleado.puesto.Nombre = cboPuesto.SelectedText;
+                }
+                else
+                {
+                    empleado.nombre = txtNombre.Text;
+                    empleado.apellido = txtApellido.Text;
+                    empleado.email = txtEmail.Text;
+                    empleado.telefono = Convert.ToInt32(txtTelefono.Text);
+                    empleado.DNI = txtDNI.Text;
+                    empleado.fnacimiento = dtpNacimiento.Value;
+                    empleado.puesto = new Puestos();
+                    empleado.puesto.id = (int)cboPuesto.SelectedValue;
+                    empleado.puesto.Nombre = cboPuesto.SelectedText;
+                }
+                if (negocio.InsertarEmpleado(empleado))
+                {
+                    MessageBox.Show("Empleado agregado", "Alta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrio un error", "Alta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             } else
             {
-                empleado.nombre = txtNombre.Text;
-                empleado.apellido = txtApellido.Text;
-                empleado.email = txtEmail.Text;
-                empleado.telefono = Convert.ToInt32(txtTelefono.Text);
-                empleado.DNI = txtDNI.Text;
-                empleado.fnacimiento = dtpNacimiento.Value;
-                empleado.puesto = new Puestos();
-                empleado.puesto.id = (int)cboPuesto.SelectedValue;
-                empleado.puesto.Nombre = cboPuesto.SelectedText;
-            }
-            if (negocio.InsertarEmpleado(empleado))
-            {
-                MessageBox.Show("Empleado agregado", "Alta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
-            } else
-            {
-                MessageBox.Show("Ocurrio un error", "Alta", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                empleadoMod.email = txtEmail.Text;
+                empleadoMod.telefono = Convert.ToInt32(txtTelefono.Text);
+                empleadoMod.puesto.id = (int)cboPuesto.SelectedValue;
+                empleadoMod.puesto.Nombre = cboPuesto.SelectedText;
+                if (negocio.ModificaEmpleado(empleadoMod))
+                {
+                    MessageBox.Show("Empleado modificado correctamente", "Modificacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrio un error", "Modificacion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }            
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -143,7 +194,7 @@ namespace WinForms_CallCenter
             
             if (txtDNI.Text == "")
             {
-                MessageBox.Show("Deje vacio el campo", "vacio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Dejo vacio el campo", "vacio", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             EmpleadosNegocio negocioEmp = new EmpleadosNegocio();
@@ -177,6 +228,8 @@ namespace WinForms_CallCenter
                 txtEmail.Text = this.local.email;
                 txtTelefono.Text = this.local.telefono.ToString();
                 dtpNacimiento.Value = this.local.fnacimiento;
+                txtDNI.Enabled = false;
+                btnBuscar.Enabled = false;
             }
 
         }

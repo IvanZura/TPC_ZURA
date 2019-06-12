@@ -15,6 +15,7 @@ namespace WinForms_CallCenter
     public partial class EmpleadosListado : Form
     {
         private List<Empleados> ListadoEmpleados;
+        EmpleadosNegocio negocioEmpleados;
         public EmpleadosListado()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@ namespace WinForms_CallCenter
 
         private void cargarGrilla()
         {
-            EmpleadosNegocio negocioEmpleados = new EmpleadosNegocio();
+            negocioEmpleados = new EmpleadosNegocio();
             try
             {
                 this.ListadoEmpleados = negocioEmpleados.ListarEmpleados();
@@ -55,6 +56,9 @@ namespace WinForms_CallCenter
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            EmpleadosAlta mod = new EmpleadosAlta((Empleados)dgvEmpleados.CurrentRow.DataBoundItem);
+            mod.ShowDialog();
+            this.cargarGrilla();
             //UsuariosAlta alta = new UsuariosAlta((Usuarios)dgvEmpleados.CurrentRow.DataBoundItem);
             //alta.ShowDialog();
             //this.cargarGrilla();
@@ -79,20 +83,19 @@ namespace WinForms_CallCenter
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            //DialogResult res = MessageBox.Show("¿Seguro?", "Baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //if (res == DialogResult.Yes)
-            //{
-            //    UsuariosNegocio negocio = new UsuariosNegocio();
-            //    if (negocio.DeleteUsuario((Usuarios)dgvEmpleados.CurrentRow.DataBoundItem))
-            //    {
-            //        MessageBox.Show("Baja correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        this.cargarGrilla();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
+            DialogResult res = MessageBox.Show("¿Seguro?", "Baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                if (negocioEmpleados.BajaEmpleado((Empleados)dgvEmpleados.CurrentRow.DataBoundItem))
+                {
+                    MessageBox.Show("Baja correcta", "Baja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.cargarGrilla();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ namespace WinForms_CallCenter
 {
     public partial class ClientesListado : Form
     {
+        ClientesNegocio negocioClientes;
         private List<Clientes> ListadoClientes;
         public ClientesListado()
         {
@@ -26,7 +27,7 @@ namespace WinForms_CallCenter
 
         private void cargarGrilla()
         {
-            ClientesNegocio negocioClientes = new ClientesNegocio();
+            negocioClientes = new ClientesNegocio();
             try
             {
                 this.ListadoClientes = negocioClientes.ListarClientes();
@@ -67,6 +68,9 @@ namespace WinForms_CallCenter
 
         private void btnAlta_Click(object sender, EventArgs e)
         {
+            ClientesAlta alta = new ClientesAlta();
+            alta.ShowDialog();
+            this.cargarGrilla();
             //UsuariosAlta alta = new UsuariosAlta();
             //alta.ShowDialog();
             //this.cargarGrilla();
@@ -74,6 +78,9 @@ namespace WinForms_CallCenter
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            ClientesAlta mod = new ClientesAlta((Clientes)dgvClientes.CurrentRow.DataBoundItem);
+            mod.ShowDialog();
+            this.cargarGrilla();
             //UsuariosAlta alta = new UsuariosAlta((Usuarios)dgvClientes.CurrentRow.DataBoundItem);
             //alta.ShowDialog();
             //this.cargarGrilla();
@@ -81,20 +88,19 @@ namespace WinForms_CallCenter
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            //DialogResult res = MessageBox.Show("¿Seguro?", "Baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //if (res == DialogResult.Yes)
-            //{
-            //    UsuariosNegocio negocio = new UsuariosNegocio();
-            //    if (negocio.DeleteUsuario((Usuarios)dgvClientes.CurrentRow.DataBoundItem))
-            //    {
-            //        MessageBox.Show("Baja correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        this.cargarGrilla();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
+            DialogResult res = MessageBox.Show("¿Seguro?", "Baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                if (negocioClientes.BajaCliente((Clientes)dgvClientes.CurrentRow.DataBoundItem))
+                {
+                    MessageBox.Show("Baja correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.cargarGrilla();
+                }
+                else
+                {
+                    MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

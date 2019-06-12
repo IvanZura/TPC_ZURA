@@ -111,7 +111,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select * from Empleados as emp inner join Personas as p on emp.IDPersona = p.ID where p.DNI = '"+ DNI +"'";
+                comando.CommandText = "select * from Empleados as emp inner join Personas as p on emp.IDPersona = p.ID where p.DNI = '"+ DNI +"' and emp.activo = 1";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -189,6 +189,62 @@ namespace Negocio
                 {
                     return false;
                 }
+            }
+        }
+        public bool BajaEmpleado(Empleados empleado)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = "update empleados set activo = 0 where ID =" + empleado.legajo;
+            comando.Connection = conexion;
+            conexion.Open();
+            lector = comando.ExecuteReader();
+            lector.Read();
+            if (lector.RecordsAffected > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool ModificaEmpleado(Empleados empleado)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = "update personas set Email = '" + empleado.email + "', Telefono = " + empleado.telefono + " where ID =" + empleado.idpersona;
+            comando.Connection = conexion;
+            conexion.Open();
+            lector = comando.ExecuteReader();
+            lector.Read();
+            if (lector.RecordsAffected > 0)
+            {
+                conexion.Close();
+                comando.CommandText = "update empleados set IDPuesto = " + empleado.puesto.id + " where ID =" + empleado.legajo;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.RecordsAffected > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
     }

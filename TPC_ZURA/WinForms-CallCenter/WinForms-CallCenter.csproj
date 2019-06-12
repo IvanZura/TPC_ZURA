@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientesAlta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientesAlta.Designer.cs">
+      <DependentUpon>ClientesAlta.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientesListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     <Compile Include="UsuariosListado.Designer.cs">
       <DependentUpon>UsuariosListado.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ClientesAlta.resx">
+      <DependentUpon>ClientesAlta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClientesListado.resx">
       <DependentUpon>ClientesListado.cs</DependentUpon>
     </EmbeddedResource>

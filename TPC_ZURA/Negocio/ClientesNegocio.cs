@@ -57,5 +57,144 @@ namespace Negocio
                 conexion.Close();
             }
         }
+        public bool ExisteCliente(string DNI)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select * from clientes as cl inner join Personas as p on cl.IDPersona = p.ID where p.DNI = '" + DNI + "' and cl.activo = 1";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.HasRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+        }
+
+        public bool InsertarCliente(Clientes cliente)
+        {
+            PersonasNegocio negocioP = new PersonasNegocio();
+            int idPersona = 0;
+            if (cliente.idpersona == 0)
+            {
+                idPersona = negocioP.AgregarPersona((Personas)cliente);
+                if (idPersona != 0)
+                {
+                    SqlConnection conexion = new SqlConnection();
+                    SqlCommand comando = new SqlCommand();
+                    SqlDataReader lector;
+
+                    conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                    comando.CommandType = System.Data.CommandType.Text;
+                    comando.CommandText = "insert into clientes (IDPersona)" +
+                        " values (" + idPersona + ")";
+                    comando.Connection = conexion;
+                    conexion.Open();
+                    lector = comando.ExecuteReader();
+                    lector.Read();
+                    if (lector.RecordsAffected > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                idPersona = cliente.idpersona;
+                SqlConnection conexion = new SqlConnection();
+                SqlCommand comando = new SqlCommand();
+                SqlDataReader lector;
+
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "insert into clientes (IDPersona)" +
+                    " values (" + idPersona + ")";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.RecordsAffected > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        public bool BajaCliente(Clientes cliente)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = "update clientes set activo = 0 where ID =" + cliente.idcliente;
+            comando.Connection = conexion;
+            conexion.Open();
+            lector = comando.ExecuteReader();
+            lector.Read();
+            if (lector.RecordsAffected > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool ModificaCliente(Clientes cliente)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+            comando.CommandType = System.Data.CommandType.Text;
+            comando.CommandText = "update personas set Email = '" + cliente.email + "', Telefono = " + cliente.telefono + " where ID =" + cliente.idpersona;
+            comando.Connection = conexion;
+            conexion.Open();
+            lector = comando.ExecuteReader();
+            lector.Read();
+            if (lector.RecordsAffected > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
