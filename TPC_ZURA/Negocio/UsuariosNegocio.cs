@@ -11,203 +11,103 @@ namespace Negocio
 {
     public class UsuariosNegocio
     {
-        //public bool DeleteUsuario(Usuarios mod)
-        //{
-        //    SqlConnection conexion = new SqlConnection();
-        //    SqlCommand comando = new SqlCommand();
-        //    SqlDataReader lector;
+        public bool BorrarUsuario(Usuarios mod)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
 
-        //    try
-        //    {
-        //        conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
-        //        comando.CommandType = System.Data.CommandType.Text;
-        //        comando.CommandText = "update usuarios set activo = 0 where id = " + mod.id;
-        //        comando.Connection = conexion;
-        //        conexion.Open();
-        //        lector = comando.ExecuteReader();
-        //        lector.Read();
-        //        if (lector.RecordsAffected > 0)
-        //        {
-        //            return true;
-        //        } else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        conexion.Close();
-        //    }
-        //}
-        //public bool UpdateUsuario(Usuarios mod, string pass)
-        //{
-        //    SqlConnection conexion = new SqlConnection();
-        //    SqlCommand comando = new SqlCommand();
-        //    SqlDataReader lector;
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "update usuarios set activo = 0 where id = " + mod.id;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.RecordsAffected > 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        public bool ModificarUsuario(Usuarios mod, Personas elegido)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
 
-        //    try
-        //    {
-        //        conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
-        //        comando.CommandType = System.Data.CommandType.Text;
-        //        comando.CommandText = "update personas set nombre = '"+mod.nombre+"', apellido = " +
-        //            "'"+mod.apellido+"', fnacimiento = '"+mod.fnacimiento.Date.ToString("yyyy-MM-dd") + "'," +
-        //            "email = '"+mod.email+"', telefono = "+ mod.telefono+" where id = " + mod.idpersona + "" +
-        //            "; update usuarios set usuario = '"+mod.usuario+"', pass = '"+pass+"', " +
-        //            "tipousuario = "+mod.tipo.tipo+" where id = " + mod.id;
-        //        comando.Connection = conexion;
-        //        conexion.Open();
-        //        lector = comando.ExecuteReader();
-        //        lector.Read();
-        //        if (lector.RecordsAffected > 0)
-        //        {
-        //            return true;
-        //        } else
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        conexion.Close();
-        //    }
-        //}
-        //public bool InsertarUsuario(Usuarios nuevo, string pass)
-        //{
-        //    bool estado = false;
-        //    SqlConnection conexion = new SqlConnection();
-        //    SqlCommand comando = new SqlCommand();
-        //    SqlDataReader lector;
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "update usuarios set pass = '' where ID = " + mod.id;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.RecordsAffected > 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        public bool InsertarUsuario(Usuarios nuevo, Personas elegido)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
 
-        //    try
-        //    {
-        //        conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
-        //        comando.CommandType = System.Data.CommandType.Text;                
-        //        comando.CommandText = "insert into personas (nombre, apellido, fnacimiento, email, telefono)" +
-        //            " values ('" + nuevo.nombre + "','" + nuevo.apellido + "','" + nuevo.fnacimiento.Date.ToString("yyyy-MM-dd") + "'," +
-        //            "'" + nuevo.email + "'," + nuevo.telefono + ")";
-        //        comando.Connection = conexion;
-        //        conexion.Open();
-        //        lector = comando.ExecuteReader();
-        //        lector.Read();
-        //        int idPersona;
-        //        int idUsuario;
-        //        if (lector.RecordsAffected > 0)
-        //        {
-        //            conexion.Close();
-        //            comando.CommandText = "Select id from personas where email = '" + nuevo.email + "'";
-        //            conexion.Open();
-        //            lector = comando.ExecuteReader();
-        //            lector.Read();
-        //            idPersona = (int)lector["id"];
-        //            conexion.Close();
-        //            comando.CommandText = "insert into usuarios (idpersona, usuario, pass, tipousuario, activo) " +
-        //                "values (" + idPersona + ", '" + nuevo.usuario + "', '" + pass + "', " + nuevo.tipo.tipo + ", 1)";
-        //            conexion.Open();
-        //            lector = comando.ExecuteReader();
-        //            lector.Read();
-        //            if (lector.RecordsAffected > 0)
-        //            {
-        //                conexion.Close();
-        //                comando.CommandText = "select id from usuarios where usuario = '" + nuevo.usuario + "' and tipousuario = " + nuevo.tipo.tipo;
-        //                conexion.Open();
-        //                lector = comando.ExecuteReader();
-        //                lector.Read();
-        //                idUsuario = (int)lector["id"];
-        //                conexion.Close();
-        //                if (nuevo.tipo.tipo == 4)
-        //                {
-        //                    comando.CommandText = "insert into clientes (idusuario) values (" + idUsuario + ")";
-        //                    conexion.Open();
-        //                    lector = comando.ExecuteReader();
-        //                    lector.Read();
-        //                    if (lector.RecordsAffected > 0)
-        //                    {
-        //                        estado = true;
-        //                    }
-        //                    else
-        //                    {
-        //                        return false;
-        //                    }
-        //                }
-        //                else
-        //                {
-        //                    comando.CommandText = "insert into empleados (idusuario) values (" + idUsuario + ")";
-        //                    conexion.Open();
-        //                    lector = comando.ExecuteReader();
-        //                    lector.Read();
-        //                    if (lector.RecordsAffected > 0)
-        //                    {
-        //                        estado = true;
-        //                    }
-        //                    else
-        //                    {
-        //                        return false;
-        //                    }
-        //                }
-        //            } else
-        //            {
-        //                return false;
-        //            }
-        //        } else
-        //        {
-        //            estado = false;
-        //        }
-        //        return estado;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        conexion.Close();
-        //    }
-        //}
-        //public List<TipoUsuario> ListarTiposUsuarios()
-        //{
-        //    SqlConnection conexion = new SqlConnection();
-        //    SqlCommand comando = new SqlCommand();
-        //    SqlDataReader lector;
-        //    List<TipoUsuario> listado = new List<TipoUsuario>();
-        //    TipoUsuario nuevo;
-
-        //    try
-        //    {
-        //        conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
-        //        comando.CommandType = System.Data.CommandType.Text;
-        //        //MSF-20190420: agregué todos los datos del heroe. Incluso su universo, que lo traigo con join.
-        //        comando.CommandText = "select id, nombre from TiposUsuarios";
-        //        comando.Connection = conexion;
-        //        conexion.Open();
-        //        lector = comando.ExecuteReader();
-
-        //        while(lector.Read())
-        //        {
-        //            //nuevo = new TipoUsuario((int)lector["id"], lector["nombre"].ToString());
-        //            nuevo = new TipoUsuario();
-        //            nuevo.tipo = (int)lector["id"];
-        //            nuevo.nombre = lector["nombre"].ToString();
-        //            listado.Add(nuevo);
-        //        }
-        //        return listado;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        conexion.Close();
-        //    }
-        //}
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;                
+                comando.CommandText = "INSERT INTO Usuarios (IDPersona, Usuario, Pass, Activo) values (" + elegido.idpersona + "" +
+                    ", '" + nuevo.usuario + "', '" + nuevo.pass + "', 1)";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.RecordsAffected > 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
         
         public List<Usuarios> ListarUsuarios()
         {
@@ -221,8 +121,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                //MSF-20190420: agregué todos los datos del heroe. Incluso su universo, que lo traigo con join.
-                comando.CommandText = "select us.ID, us.IDPersona, us.Usuario, us.FechaAlta, isnull((select ID from empleados where IDPersona = us.IDPersona and activo = 1), 0) as empleado, isnull((select ID from clientes where IDPersona = us.IDPersona and activo = 1), 0) as cliente from usuarios as us where us.activo = 1";
+                comando.CommandText = "select us.ID, us.IDPersona, us.Usuario, us.FechaAlta, isnull((select ID from empleados where IDPersona = us.IDPersona and activo = 1), 0) as empleado, isnull((select ID from clientes where IDPersona = us.IDPersona and activo = 1), 0) as cliente, (select DNI from personas where ID = us.IDPersona and activo = 1) as DNI from usuarios as us where us.activo = 1";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -231,15 +130,49 @@ namespace Negocio
                 {
                     nuevo = new Usuarios();
                     nuevo.id = (int)lector["ID"];
+                    nuevo.idPersona = (int)lector["IDPersona"];
                     nuevo.usuario = lector["Usuario"].ToString();
                     nuevo.altaUsuario = (DateTime)lector["FechaAlta"];
-                    nuevo.idCliente = (int)lector["cliente"];
-                    nuevo.idEmpleado = (int)lector["empleado"];
+                    nuevo.Cliente = (int)lector["cliente"];
+                    nuevo.Empleado = (int)lector["empleado"];
+                    nuevo.DNI = lector["DNI"].ToString();
 
                     listado.Add(nuevo);
                 }
 
                 return listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        public bool ExisteUsuario(Personas elegido)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select * from usuarios where activo = 1 and IDPersona = " + elegido.idpersona;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {

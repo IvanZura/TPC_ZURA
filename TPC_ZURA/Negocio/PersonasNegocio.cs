@@ -11,6 +11,48 @@ namespace Negocio
 {
     public class PersonasNegocio
     {
+        public List<Personas> ListarPersonas(int op)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            List<Personas> listado = new List<Personas>();
+            Personas nuevo;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                if (op == 0)
+                {
+                    comando.CommandText = "select p.ID, p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto, p.Nombre, p.Apellido, p.FNacimiento, p.Email, p.Telefono, p.DNI, p.FechaAlta from Personas as p inner join Empleados as emp on emp.idpersona = p.id and emp.activo = 1";
+                } else
+                {
+                    comando.CommandText = "select p.ID, p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto, p.Nombre, p.Apellido, p.FNacimiento, p.Email, p.Telefono, p.DNI, p.FechaAlta from Personas as p";
+                }
+                
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                while (lector.Read())
+                {
+                    nuevo = new Personas();
+                    nuevo.idpersona = (int)lector["ID"];
+                    nuevo.nombre = lector["Nombre"].ToString();
+                    nuevo.apellido = lector["Apellido"].ToString();
+                    nuevo.NombreCompleto = lector["NombreCompleto"].ToString();
+                    nuevo.DNI = lector["DNI"].ToString();
+
+                    listado.Add(nuevo);
+                }
+
+                return listado;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
         // Inserta la persona y devuelve su ID. Si no es posible, devuelve 0
         public int AgregarPersona (Personas persona)
         {

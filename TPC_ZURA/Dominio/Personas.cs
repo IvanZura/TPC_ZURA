@@ -16,5 +16,6 @@ namespace Dominio
         public int telefono { get; set; }
         public string DNI { get; set; }
         public DateTime altaPersona { get; set; }
+        public string NombreCompleto { get; set; }
     }
 }

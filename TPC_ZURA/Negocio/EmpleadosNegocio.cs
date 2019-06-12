@@ -23,7 +23,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                //MSF-20190420: agregué todos los datos del heroe. Incluso su universo, que lo traigo con join.
+                
                 comando.CommandText = "select pu.ID as IDPuesto, pu.nombre as nombrePuesto, pu.nombre, emp.ID, emp.IDPersona, emp.IDPuesto, emp.FechaAlta as altaEmpleado, emp.Activo, p.Nombre, p.Apellido, p.FNacimiento, p.Email, p.Telefono, p.DNI, p.FechaAlta as altaPersona from Empleados as emp inner join Personas as p on emp.IDPersona = p.ID inner join Puestos as pu on pu.ID = emp.IDPuesto where emp.activo = 1";
                 comando.Connection = conexion;
                 conexion.Open();

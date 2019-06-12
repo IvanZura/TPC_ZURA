@@ -32,9 +32,9 @@ namespace WinForms_CallCenter
                 this.ListadoUsuarios = negocioUsuarios.ListarUsuarios();
                 dgvUsuarios.DataSource = this.ListadoUsuarios;
                 dgvUsuarios.Columns[0].Visible = false;
-                //dgvUsuarios.Columns[4].Visible = false;
-                /*dgvUsuarios.Columns[2].Visible = false;
-                dgvUsuarios.Columns[4].Visible = false;*/
+                dgvUsuarios.Columns[1].Visible = false;
+                dgvUsuarios.Columns[3].Visible = false;
+                //dgvUsuarios.Columns[4].Visible = false;*/
 
             }
             catch (Exception ex)
@@ -62,33 +62,33 @@ namespace WinForms_CallCenter
 
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            //UsuariosAlta alta = new UsuariosAlta();
-            //alta.ShowDialog();
-            //this.cargarGrilla();
+            UsuariosAlta alta = new UsuariosAlta();
+            alta.ShowDialog();
+            this.cargarGrilla();
         }
 
         private void btnMod_Click(object sender, EventArgs e)
         {
-            //UsuariosAlta alta = new UsuariosAlta((Usuarios)dgvUsuarios.CurrentRow.DataBoundItem);
-            //alta.ShowDialog();
-            //this.cargarGrilla();
+            UsuariosAlta alta = new UsuariosAlta((Usuarios)dgvUsuarios.CurrentRow.DataBoundItem);
+            alta.ShowDialog();
+            this.cargarGrilla();
         }
 
         private void btnBorrar_Click(object sender, EventArgs e)
         {
-            //DialogResult res = MessageBox.Show("¿Seguro?", "Baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            //if (res == DialogResult.Yes)
-            //{
-            //    UsuariosNegocio negocio = new UsuariosNegocio();
-            //    if (negocio.DeleteUsuario((Usuarios)dgvUsuarios.CurrentRow.DataBoundItem))
-            //    {
-            //        MessageBox.Show("Baja correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //        this.cargarGrilla();
-            //    } else
-            //    {
-            //        MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
+            DialogResult res = MessageBox.Show("¿Seguro?", "Baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                UsuariosNegocio negocio = new UsuariosNegocio();
+                if (negocio.BorrarUsuario((Usuarios)dgvUsuarios.CurrentRow.DataBoundItem))
+                {
+                    MessageBox.Show("Baja correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.cargarGrilla();
+                } else
+                {
+                    MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

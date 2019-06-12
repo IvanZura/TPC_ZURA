@@ -32,7 +32,7 @@ namespace WinForms_CallCenter
             {
                 this.ListadoClientes = negocioClientes.ListarClientes();
                 dgvClientes.DataSource = this.ListadoClientes;
-                dgvClientes.Columns[0].Visible = false;
+                //dgvClientes.Columns[0].Visible = false;
                 dgvClientes.Columns[2].Visible = false;
                 //dgvClientes.Columns[2].Visible = false;
                 //dgvClientes.Columns[3].Visible = false;
