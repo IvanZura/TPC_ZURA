@@ -7,12 +7,12 @@ go
 use ZURA_DB
 go
 
-CREATE TABLE TiposUsuarios (
-	ID	int primary key identity(1, 1) not null,
-	Nombre	varchar(50) not null
-)
+--CREATE TABLE TiposUsuarios (
+--	ID	int primary key identity(1, 1) not null,
+--	Nombre	varchar(50) not null
+--)
 
-GO
+--GO
 
 CREATE TABLE Personas (
 	ID	int primary key identity(1, 1) not null,
@@ -55,12 +55,10 @@ GO
 
 CREATE TABLE Usuarios (
 	ID int primary key identity(1, 1) not null,
+	IDPersona	int not null foreign key references Personas(ID),
 	Usuario	varchar(50) not null,
 	Pass	varchar(50) not null,
 	FechaAlta	date not null default(getdate()),
-	TipoUsuario	int not null foreign key references TiposUsuarios(ID),
-	IDCliente	int	null,
-	IDEmpleado  int null,
 	Activo	bit	not null
 )
 
@@ -68,7 +66,8 @@ GO
 
 CREATE TABLE TiposIncidencias (
 	ID	int primary key identity(1, 1) not null,
-	Nombre	varchar(50) not null
+	Nombre	varchar(50) not null,
+	Activo bit not null default(1)
 )
 
 go
@@ -99,10 +98,6 @@ CREATE TABLE Reclamos (
 
 go
 
-INSERT INTO TiposUsuarios (Nombre)
-VALUES ('Empleado'), ('Cliente')
-
-go
 
 INSERT INTO Personas (Nombre, Apellido, FNacimiento, Email, Telefono, DNI)
 VALUES ('Ivan', 'Zura', '1995/10/20', 'no@no.com', 1125263598, '39148492'), ('Maxi', 'Sar', '01/01/1901', 'prog3@JA.com', 1188888888, '35123123')
@@ -124,8 +119,8 @@ VALUES (1, 2)
 
 go
 
-INSERT INTO Usuarios (Usuario, Pass, TipoUsuario, IDCliente, IDEmpleado, Activo)
-VALUES ('izura', '123', 1, 0, 1, 1), ('msar', '123', 2, 1, 0, 1)
+INSERT INTO Usuarios (Usuario, Pass, Activo, IDPersona)
+VALUES ('izura', '123', 1, 1), ('msar', '123', 1, 2)
 
 go
 
