@@ -10,10 +10,9 @@ namespace Dominio
     {
         public int id { get; set; }
         public string usuario { get; set; }
-        public TipoUsuario tipo { get; set; }
         public DateTime altaUsuario { get; set; }
-        public Clientes cliente { get; set; }
-        public Empleados empleado { get; set; }
+        public int idCliente { get; set; }
+        public int idEmpleado { get; set; }
 
         /*public Usuarios (int ID, int IDPersona, string Nombre,
             string Apellido, string Usuario, int Tipo, string NombreTipo,

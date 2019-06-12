@@ -43,10 +43,10 @@ namespace WinForms_CallCenter
 
         private void CargarCBOTipos()
         {
-            UsuariosNegocio listadoNegocio = new UsuariosNegocio();
-            cboTipos.DisplayMember = "nombre";
-            cboTipos.ValueMember = "id";
-            cboTipos.DataSource = listadoNegocio.ListarTiposUsuarios();
+            //UsuariosNegocio listadoNegocio = new UsuariosNegocio();
+            //cboTipos.DisplayMember = "nombre";
+            //cboTipos.ValueMember = "id";
+            //cboTipos.DataSource = listadoNegocio.ListarTiposUsuarios();
         }
 
         private bool ValidarCampos()

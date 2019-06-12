@@ -171,43 +171,43 @@ namespace Negocio
         //        conexion.Close();
         //    }
         //}
-        public List<TipoUsuario> ListarTiposUsuarios()
-        {
-            SqlConnection conexion = new SqlConnection();
-            SqlCommand comando = new SqlCommand();
-            SqlDataReader lector;
-            List<TipoUsuario> listado = new List<TipoUsuario>();
-            TipoUsuario nuevo;
+        //public List<TipoUsuario> ListarTiposUsuarios()
+        //{
+        //    SqlConnection conexion = new SqlConnection();
+        //    SqlCommand comando = new SqlCommand();
+        //    SqlDataReader lector;
+        //    List<TipoUsuario> listado = new List<TipoUsuario>();
+        //    TipoUsuario nuevo;
 
-            try
-            {
-                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
-                comando.CommandType = System.Data.CommandType.Text;
-                //MSF-20190420: agregué todos los datos del heroe. Incluso su universo, que lo traigo con join.
-                comando.CommandText = "select id, nombre from TiposUsuarios";
-                comando.Connection = conexion;
-                conexion.Open();
-                lector = comando.ExecuteReader();
+        //    try
+        //    {
+        //        conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+        //        comando.CommandType = System.Data.CommandType.Text;
+        //        //MSF-20190420: agregué todos los datos del heroe. Incluso su universo, que lo traigo con join.
+        //        comando.CommandText = "select id, nombre from TiposUsuarios";
+        //        comando.Connection = conexion;
+        //        conexion.Open();
+        //        lector = comando.ExecuteReader();
 
-                while(lector.Read())
-                {
-                    //nuevo = new TipoUsuario((int)lector["id"], lector["nombre"].ToString());
-                    nuevo = new TipoUsuario();
-                    nuevo.tipo = (int)lector["id"];
-                    nuevo.nombre = lector["nombre"].ToString();
-                    listado.Add(nuevo);
-                }
-                return listado;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                conexion.Close();
-            }
-        }
+        //        while(lector.Read())
+        //        {
+        //            //nuevo = new TipoUsuario((int)lector["id"], lector["nombre"].ToString());
+        //            nuevo = new TipoUsuario();
+        //            nuevo.tipo = (int)lector["id"];
+        //            nuevo.nombre = lector["nombre"].ToString();
+        //            listado.Add(nuevo);
+        //        }
+        //        return listado;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //    finally
+        //    {
+        //        conexion.Close();
+        //    }
+        //}
         
         public List<Usuarios> ListarUsuarios()
         {
@@ -222,7 +222,7 @@ namespace Negocio
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
                 //MSF-20190420: agregué todos los datos del heroe. Incluso su universo, que lo traigo con join.
-                comando.CommandText = "select us.ID, us.Usuario, us.FechaAlta as altaUsuario, us.TipoUsuario, us.IDCliente, us.IDEmpleado, tus.Nombre as nombreTipo from usuarios as us inner join TiposUsuarios as tus on us.TipoUsuario = tus.ID where us.Activo = 1";
+                comando.CommandText = "select us.ID, us.IDPersona, us.Usuario, us.FechaAlta, isnull((select ID from empleados where IDPersona = us.IDPersona and activo = 1), 0) as empleado, isnull((select ID from clientes where IDPersona = us.IDPersona and activo = 1), 0) as cliente from usuarios as us where us.activo = 1";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -232,20 +232,9 @@ namespace Negocio
                     nuevo = new Usuarios();
                     nuevo.id = (int)lector["ID"];
                     nuevo.usuario = lector["Usuario"].ToString();
-                    nuevo.tipo = new TipoUsuario();
-                    nuevo.tipo.tipo = (int)lector["TipoUsuario"];
-                    nuevo.tipo.nombre = lector["nombreTipo"].ToString();
-                    nuevo.altaUsuario = (DateTime)lector["altaUsuario"];
-                    if ((int)lector["IDCliente"] != 0)
-                    {
-                        nuevo.cliente = new Clientes();
-                        nuevo.cliente.idcliente = (int)lector["IDCliente"];
-                    }
-                    if ((int)lector["IDEmpleado"] != 0)
-                    {
-                        nuevo.empleado = new Empleados();
-                        nuevo.empleado.legajo = (int)lector["IDEmpleado"];
-                    }
+                    nuevo.altaUsuario = (DateTime)lector["FechaAlta"];
+                    nuevo.idCliente = (int)lector["cliente"];
+                    nuevo.idEmpleado = (int)lector["empleado"];
 
                     listado.Add(nuevo);
                 }

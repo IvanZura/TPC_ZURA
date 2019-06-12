@@ -49,7 +49,6 @@
     <Compile Include="Puestos.cs" />
     <Compile Include="Reclamo.cs" />
     <Compile Include="TipoIncidencia.cs" />
-    <Compile Include="TipoUsuario.cs" />
     <Compile Include="Usuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
