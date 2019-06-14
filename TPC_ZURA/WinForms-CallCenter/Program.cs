@@ -16,7 +16,7 @@ namespace WinForms_CallCenter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Principal());
+            Application.Run(new Login());
         }
     }
 }

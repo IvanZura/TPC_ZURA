@@ -183,5 +183,49 @@ namespace Negocio
                 conexion.Close();
             }
         }
+        public Usuarios LoginUsuario(string usuDNI, string pass)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            Usuarios encontrado;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select us.ID, us.IDPersona, us.Usuario, us.FechaAlta from Usuarios us inner join personas p " +
+                    "on p.ID = us.IDPersona where (p.DNI = '" + usuDNI + "' or us.Usuario = '" + usuDNI + "') " +
+                    "and pass='" + pass + "' and activo = 1";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                
+                if (lector.HasRows)
+                {
+                    encontrado = new Usuarios();
+                    encontrado.id = (int)lector["ID"];
+                    encontrado.idPersona = (int)lector["IDPersona"];
+                    encontrado.usuario = lector["usuario"].ToString();
+                    encontrado.altaUsuario = (DateTime)lector["FechaAlta"];
+                    return encontrado;
+                }
+                else
+                {
+                    encontrado = new Usuarios();
+                    encontrado.id = 0;
+                    return encontrado;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
     }
 }

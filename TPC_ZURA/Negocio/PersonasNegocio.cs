@@ -93,7 +93,7 @@ namespace Negocio
             }
             catch(Exception ex)
             {
-                return idPersona;
+                throw ex;
             }
         }
         public Personas ExistePersona (string DNI)

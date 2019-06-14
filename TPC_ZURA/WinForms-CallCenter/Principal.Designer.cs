@@ -39,8 +39,6 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reclamosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listadoToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -134,38 +132,24 @@
             // reclamosToolStripMenuItem
             // 
             this.reclamosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.crearToolStripMenuItem,
-            this.asignarToolStripMenuItem,
             this.modificarToolStripMenuItem,
             this.listadoToolStripMenuItem2});
             this.reclamosToolStripMenuItem.Name = "reclamosToolStripMenuItem";
             this.reclamosToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.reclamosToolStripMenuItem.Text = "Reclamos";
             // 
-            // crearToolStripMenuItem
-            // 
-            this.crearToolStripMenuItem.Name = "crearToolStripMenuItem";
-            this.crearToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.crearToolStripMenuItem.Text = "Crear";
-            this.crearToolStripMenuItem.Click += new System.EventHandler(this.crearToolStripMenuItem_Click);
-            // 
-            // asignarToolStripMenuItem
-            // 
-            this.asignarToolStripMenuItem.Name = "asignarToolStripMenuItem";
-            this.asignarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.asignarToolStripMenuItem.Text = "Asignar";
-            // 
             // modificarToolStripMenuItem
             // 
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
-            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+            this.modificarToolStripMenuItem.Text = "Cerrados";
+            this.modificarToolStripMenuItem.Click += new System.EventHandler(this.modificarToolStripMenuItem_Click);
             // 
             // listadoToolStripMenuItem2
             // 
             this.listadoToolStripMenuItem2.Name = "listadoToolStripMenuItem2";
-            this.listadoToolStripMenuItem2.Size = new System.Drawing.Size(125, 22);
-            this.listadoToolStripMenuItem2.Text = "Listado";
+            this.listadoToolStripMenuItem2.Size = new System.Drawing.Size(121, 22);
+            this.listadoToolStripMenuItem2.Text = "Abiertos";
             this.listadoToolStripMenuItem2.Click += new System.EventHandler(this.listadoToolStripMenuItem2_Click);
             // 
             // statusStrip1
@@ -194,6 +178,8 @@
             this.Name = "Principal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Call Center - Principal";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Principal_FormClosing);
+            this.Load += new System.EventHandler(this.Principal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -214,8 +200,6 @@
         private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem reclamosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem asignarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem empleadosToolStripMenuItem;

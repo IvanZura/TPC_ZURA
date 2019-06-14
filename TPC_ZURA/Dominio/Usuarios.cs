@@ -17,6 +17,11 @@ namespace Dominio
         public int Empleado { get; set; }
         public string DNI { get; set; }
 
+        public override string ToString()
+        {
+           return DNI;
+        }
+
         /*public Usuarios (int ID, int IDPersona, string Nombre,
             string Apellido, string Usuario, int Tipo, string NombreTipo,
             string fnacimiento, string email, int telefono)

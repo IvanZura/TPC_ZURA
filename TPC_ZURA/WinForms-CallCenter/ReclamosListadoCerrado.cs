@@ -12,31 +12,32 @@ using Negocio;
 
 namespace WinForms_CallCenter
 {
-    public partial class ReclamosListado : Form
+    public partial class ReclamosListadoCerrado : Form
     {
         ReclamosNegocio negocio = new ReclamosNegocio();
         List<Reclamo> listadoReclamos;
         Usuarios usuario;
-        public ReclamosListado(Usuarios usuario)
+        public ReclamosListadoCerrado(Usuarios usuarios)
         {
-            this.usuario = usuario;
+            this.usuario = usuarios;
             InitializeComponent();
             this.cargarGrilla();
         }
-        private void cargarGrilla()
+
+        public void cargarGrilla()
         {
             try
             {
-                this.listadoReclamos = negocio.ListarReclamos();
-                dgvReclamos.DataSource = this.listadoReclamos;
-                dgvReclamos.Columns[0].Width = 60;
-                dgvReclamos.Columns[0].HeaderText = "Ticket N°";
-                dgvReclamos.Columns[1].Visible = false;
-                dgvReclamos.Columns[5].Width = 300;
-                dgvReclamos.Columns[6].Visible = false;
+                this.listadoReclamos = negocio.ListarReclamosCerrados();
+                dgvReclamosCerrados.DataSource = this.listadoReclamos;
+                dgvReclamosCerrados.Columns[0].Width = 60;
+                dgvReclamosCerrados.Columns[0].HeaderText = "Ticket N°";
+                //dgvReclamos.Columns[1].Visible = false;
+                dgvReclamosCerrados.Columns[5].Width = 300;
+                /////dgvReclamos.Columns[5].Visible = false;
                 //dgvUsuarios.Columns[1].Visible = false;
-                //dgvUsuarios.Columns[3].Visible = false;
-                //dgvUsuarios.Columns[4].Visible = false;*/
+                //dgvReclamosCerrados.Columns[9].Visible = false;
+                //dgvReclamosCerrados.Columns[10].Visible = false;
 
             }
             catch (Exception ex)
@@ -47,24 +48,22 @@ namespace WinForms_CallCenter
 
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            ReclamosCrear crear = new ReclamosCrear(this.usuario);
-            crear.ShowDialog();
-            this.cargarGrilla();
+
         }
 
         private void btnVer_Click(object sender, EventArgs e)
         {
-            if (this.dgvReclamos.CurrentRow == null)
+            if (this.dgvReclamosCerrados.CurrentRow == null)
             {
                 MessageBox.Show("No se selecciono nada", "Seleccion", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
+            } else
             {
-                Reclamo rec = (Reclamo)this.dgvReclamos.CurrentRow.DataBoundItem;
-                VerReclamo ver = new VerReclamo(rec, 0, this.usuario);
+                Reclamo rec = (Reclamo)this.dgvReclamosCerrados.CurrentRow.DataBoundItem;
+                VerReclamo ver = new VerReclamo(rec, 1, this.usuario);
                 ver.ShowDialog();
                 this.cargarGrilla();
             }
+            
         }
     }
 }

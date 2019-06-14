@@ -35,9 +35,13 @@ C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinFor
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms-CallCenter.exe
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms-CallCenter.pdb
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ClientesListado.resources
-C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ReclamosCrear.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ReclamosListado.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.UsuariosListado.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.UsuariosAlta.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.EmpleadosAlta.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ClientesAlta.resources
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.BuscarCliente.resources
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ReclamosCrear.resources
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.Login.resources
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ReclamosListadoCerrado.resources
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.VerReclamo.resources

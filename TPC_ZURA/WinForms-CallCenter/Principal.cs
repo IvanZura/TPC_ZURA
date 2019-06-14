@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Negocio;
+using Dominio;
 
 namespace WinForms_CallCenter
 {
@@ -17,15 +18,15 @@ namespace WinForms_CallCenter
         ClientesListado ListadoCL;
         UsuariosListado ListadoUS;
         ReclamosListado ListadoRC;
-        ReclamosCrear CrearRC;
-        public Principal()
+        Usuarios usuario;
+        public Principal(Usuarios usuario)
         {
             InitializeComponent();
+            this.usuario = usuario;
             ListadoEMP = new EmpleadosListado();
             ListadoCL = new ClientesListado();
             ListadoUS = new UsuariosListado();
-            ListadoRC = new ReclamosListado();
-            CrearRC = new ReclamosCrear();
+            ListadoRC = new ReclamosListado(this.usuario);
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,14 +59,24 @@ namespace WinForms_CallCenter
 
         private void listadoToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            ListadoRC = new ReclamosListado();
+            ListadoRC = new ReclamosListado(this.usuario);
             ListadoRC.Show();
         }
 
-        private void crearToolStripMenuItem_Click(object sender, EventArgs e)
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CrearRC = new ReclamosCrear();
-            CrearRC.Show();
+            ReclamosListadoCerrado ListadoRCCerrados = new ReclamosListadoCerrado(this.usuario);
+            ListadoRCCerrados.Show();
+        }
+
+        private void Principal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Principal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

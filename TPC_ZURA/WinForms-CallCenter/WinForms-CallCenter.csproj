@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuscarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuscarCliente.Designer.cs">
+      <DependentUpon>BuscarCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientesAlta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,24 @@
     </Compile>
     <Compile Include="EmpleadosAlta.Designer.cs">
       <DependentUpon>EmpleadosAlta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReclamosCrear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReclamosCrear.Designer.cs">
+      <DependentUpon>ReclamosCrear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReclamosListadoCerrado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReclamosListadoCerrado.Designer.cs">
+      <DependentUpon>ReclamosListadoCerrado.cs</DependentUpon>
     </Compile>
     <Compile Include="UsuariosAlta.cs">
       <SubType>Form</SubType>
@@ -84,12 +108,6 @@
     <Compile Include="EmpleadosListado.Designer.cs">
       <DependentUpon>EmpleadosListado.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReclamosCrear.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReclamosCrear.Designer.cs">
-      <DependentUpon>ReclamosCrear.cs</DependentUpon>
-    </Compile>
     <Compile Include="ReclamosListado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +120,15 @@
     <Compile Include="UsuariosListado.Designer.cs">
       <DependentUpon>UsuariosListado.cs</DependentUpon>
     </Compile>
+    <Compile Include="VerReclamo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerReclamo.Designer.cs">
+      <DependentUpon>VerReclamo.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BuscarCliente.resx">
+      <DependentUpon>BuscarCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ClientesAlta.resx">
       <DependentUpon>ClientesAlta.cs</DependentUpon>
     </EmbeddedResource>
@@ -113,6 +140,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EmpleadosListado.resx">
       <DependentUpon>EmpleadosListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReclamosCrear.resx">
+      <DependentUpon>ReclamosCrear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReclamosListadoCerrado.resx">
+      <DependentUpon>ReclamosListadoCerrado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsuariosAlta.resx">
       <DependentUpon>UsuariosAlta.cs</DependentUpon>
@@ -129,14 +165,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ReclamosCrear.resx">
-      <DependentUpon>ReclamosCrear.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ReclamosListado.resx">
       <DependentUpon>ReclamosListado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsuariosListado.resx">
       <DependentUpon>UsuariosListado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VerReclamo.resx">
+      <DependentUpon>VerReclamo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
