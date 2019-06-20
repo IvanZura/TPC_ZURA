@@ -11,7 +11,10 @@ namespace WebForms_CallCenter
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Usuarios"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
         }
     }
 }

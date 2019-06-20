@@ -75,3 +75,9 @@ C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebFor
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\obj\Debug\WebForms-CallCenter.csproj.CopyComplete
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\obj\Debug\WebForms-CallCenter.dll
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\obj\Debug\WebForms-CallCenter.pdb
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\bin\Dominio.dll
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\bin\Negocio.dll
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\bin\AccesoDatos.dll
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\bin\Dominio.pdb
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\bin\Negocio.pdb
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WebForms-CallCenter\bin\AccesoDatos.pdb
