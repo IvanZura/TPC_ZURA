@@ -194,7 +194,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select us.ID, us.IDPersona, us.Usuario, us.FechaAlta from Usuarios us inner join personas p " +
+                comando.CommandText = "select p.DNI, us.ID, us.IDPersona, us.Usuario, us.FechaAlta from Usuarios us inner join personas p " +
                     "on p.ID = us.IDPersona where (p.DNI = '" + usuDNI + "' or us.Usuario = '" + usuDNI + "') " +
                     "and pass='" + pass + "' and activo = 1";
                 comando.Connection = conexion;
@@ -209,6 +209,7 @@ namespace Negocio
                     encontrado.idPersona = (int)lector["IDPersona"];
                     encontrado.usuario = lector["usuario"].ToString();
                     encontrado.altaUsuario = (DateTime)lector["FechaAlta"];
+                    encontrado.DNI = lector["DNI"].ToString();
                     return encontrado;
                 }
                 else

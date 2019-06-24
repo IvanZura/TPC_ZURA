@@ -10,22 +10,19 @@ using Negocio;
 
 namespace WebForms_CallCenter
 {
-    public partial class _Default : Page
+    public partial class Abiertos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuarios"] == null)
-            {
-                Response.Redirect("/Login");
-            }
+
         }
 
         [WebMethod]
-        public static Personas ElUsuario()
+        public static List<Reclamo> VerTodos()
         {
-            PersonasNegocio negocio = new PersonasNegocio();
+            ReclamosNegocio negocio = new ReclamosNegocio();
             Usuarios usuario = (Usuarios)HttpContext.Current.Session["Usuarios"];
-            return negocio.ExistePersona(usuario.DNI);
+            return negocio.ListarReclamosPorCreador(usuario.id);
         }
     }
 }

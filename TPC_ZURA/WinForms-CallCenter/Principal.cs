@@ -31,7 +31,7 @@ namespace WinForms_CallCenter
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Ja! Entraste al dope", "Acerca de");
+            MessageBox.Show("Sistema 1.0", "Acerca de");
         }
 
         private void listadoToolStripMenuItem_Click(object sender, EventArgs e)

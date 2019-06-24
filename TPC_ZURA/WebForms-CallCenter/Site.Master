@@ -4,68 +4,127 @@
 
 <html lang="es">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Call-Center</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>Login</title>
+    <style>
+        
+        .fondoDrawer {
+            background: url('fondo.png') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
 
-    <form runat="server">
+    <div id="app">
+        <v-app id="inspire">
+            <v-snackbar v-model="alerta.estado" :color="alerta.color" top right :timeout="alerta.timeout"> {{ alerta.text }} </v-snackbar>
+            <v-navigation-drawer class="fondoDrawer" dark
+              fixed
+              v-model="drawer"
+              app
+            >
+              <v-list dense>
+                <v-list-tile v-for="item in menus" :to="item.to">
+                  <v-list-tile-action>
+                    <v-icon> {{ item.icono }} </v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title> {{ item.nombre  }} </v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+                
+              </v-list>
+            </v-navigation-drawer>
+            <v-toolbar color="primary" dark fixed app>
+              <%--<v-icon @click.stop="drawer = !drawer">fas fa-bars</v-icon>--%>
+              <v-toolbar-title>Sus reclamos de cliente</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <span> {{ Nombres }} </span>
+              <v-btn flat href="/Logout">
+                  <v-icon>
+                      fas fa-sign-in-alt
+                  </v-icon>
+              </v-btn>
+            </v-toolbar>
+            <v-content>
+                <v-container>
+                    <router-view></router-view>
+                </v-container>
+            </v-content>
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+    </asp:ContentPlaceHolder>
+        </v-app>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="/Scripts/AltaReclamo.js"></script>
+    <script src="/Scripts/VerAbiertos.js"></script>
+    <script>
+        const routes = [
+            { path: '/AltaReclamo', component: Alta },
+            { path: '/VerAbiertos', component: Abiertos('<%= ResolveUrl("Abiertos.aspx/VerTodos") %>') }
+        ]
+        const router = new VueRouter({
+          routes
+        })
+        let app = new Vue({
+            el: '#app',
+            router,
+            data() {
+                return {
+                    alerta: {
+                        estado: false,
+                        timeout: 3000,
+                        text: '',
+                        color: ''
+                    },
+                    drawer: true,
+                    menus: [
+                        { nombre: 'Inicio', icono: 'fas fa-home', to: '/' },
+                        { nombre: 'Ver reclamos abiertos', icono: 'fas fa-list', to: '/VerAbiertos' },
+                        { nombre: 'Ver reclamos cerrados', icono: 'fas fa-list-alt', to: '/VerCerrados' }
+                    ],
+                    usuario: {}
+                }
+            },
+            computed: {
+                Nombres() {
+                    return `${this.usuario.apellido}, ${this.usuario.nombre}`
+                }
+            },
+            created() {
+                fetch('<%= ResolveUrl("Default.aspx/ElUsuario") %>', {
+                    method: 'POST',
+                    body: `{}`,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    return response.json()
+                })
+                .then(res => {
+                    res = res.d
+                    this.usuario = res
+                })
 
-        <nav>
-            <div class="nav-wrapper blue">
-                <a href="#!" class="brand-logo">Call Center</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">Javascript</a></li>
-                    <li><a href="mobile.html">Mobile</a></li>
-                </ul>
-            </div>
-        </nav>
-
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
-        </ul>
-
-        <div>
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-            <footer class="page-footer blue">
-                <div class="container">
-                    <div class="row">
-                        <div class="col l6 s12">
-                            <h5 class="white-text">Footer Content</h5>
-                            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                        </div>
-                        <div class="col l4 offset-l2 s12">
-                            <h5 class="white-text">Links</h5>
-                            <ul>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-copyright">
-                    <div class="container">
-                        © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-                    </div>
-                </div>
-            </footer>
-        </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    </form>
+            },
+            methods: {
+                SetSnack(texto, color) {
+                    this.alerta.text = texto
+                    this.alerta.color = color
+                    this.alerta.estado = true
+                }
+            }
+        })
+    </script>
 </body>
 </html>

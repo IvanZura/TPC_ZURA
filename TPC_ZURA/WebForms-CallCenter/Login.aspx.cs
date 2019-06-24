@@ -21,7 +21,7 @@ namespace WebForms_CallCenter
             //}
             if (Session["Usuarios"] != null)
             {
-                Response.Redirect("Default.aspx");
+                Response.Redirect("/");
             }
         }
 
