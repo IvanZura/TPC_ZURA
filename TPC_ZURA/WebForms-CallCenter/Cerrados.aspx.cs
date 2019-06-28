@@ -10,7 +10,7 @@ using Negocio;
 
 namespace WebForms_CallCenter
 {
-    public partial class _Default : Page
+    public partial class Cerrados : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,17 +21,17 @@ namespace WebForms_CallCenter
         }
 
         [WebMethod]
-        public static Clientes ElUsuario()
+        public static List<Reclamo> VerTodos()
         {
-            ClientesNegocio negocio = new ClientesNegocio();
+            ReclamosNegocio negocio = new ReclamosNegocio();
+            ClientesNegocio negocioCliente = new ClientesNegocio();
             Usuarios usuario = (Usuarios)HttpContext.Current.Session["Usuarios"];
-            Clientes cliente = negocio.ExisteClienteWeb(usuario.DNI);
-            if (cliente == null)
+            if (usuario == null)
             {
-                HttpContext.Current.Session["Usuarios"] = null;
                 HttpContext.Current.Response.Redirect("/Login");
             }
-            return cliente;
+            Clientes cliente = negocioCliente.ExisteClienteWeb(usuario.DNI);
+            return negocio.ListarReclamosCerradosPorCreador(cliente.idcliente);
         }
     }
 }

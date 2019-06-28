@@ -92,6 +92,48 @@ namespace Negocio
 
         }
 
+        public Clientes ExisteClienteWeb(string DNI)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            Clientes nuevo = null;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select p.id idpersona, cl.id idcliente, p.Nombre, p.Apellido, p.FNacimiento, p.Email, p.Telefono, p.DNI, p.FechaAlta from personas p inner join Clientes cl on cl.IDPersona = p.ID where DNI = '" + DNI + "' and cl.activo = 1";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.HasRows)
+                {
+                    nuevo = new Clientes();
+                    nuevo.idpersona = (int)lector["idpersona"];
+                    nuevo.idcliente = (int)lector["idcliente"];
+                    nuevo.nombre = lector["Nombre"].ToString();
+                    nuevo.apellido = lector["Apellido"].ToString();
+                    nuevo.email = lector["Email"].ToString();
+                    nuevo.telefono = (int)lector["Telefono"];
+                    nuevo.DNI = lector["DNI"].ToString();
+                    nuevo.altaPersona = (DateTime)lector["FechaAlta"];
+                    nuevo.fnacimiento = (DateTime)lector["FNacimiento"];
+                }
+                return nuevo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+        }
+
         public bool InsertarCliente(Clientes cliente)
         {
             PersonasNegocio negocioP = new PersonasNegocio();

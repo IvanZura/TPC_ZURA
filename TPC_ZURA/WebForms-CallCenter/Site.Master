@@ -18,6 +18,20 @@
             -o-background-size: cover;
             background-size: cover;
         }
+        .fondoTicket {
+            background: url('fondo20.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .fondoTicketCerrado {
+            background: url('fondo23.png') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +69,7 @@
             </v-toolbar>
             <v-content>
                 <v-container>
-                    <router-view></router-view>
+                    <router-view :usuario="usuario"></router-view>
                 </v-container>
             </v-content>
     <asp:ContentPlaceHolder ID="MainContent" runat="server">
@@ -65,12 +79,14 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
-    <script src="/Scripts/AltaReclamo.js"></script>
     <script src="/Scripts/VerAbiertos.js"></script>
+    <script src="/Scripts/VerCerrados.js"></script>
+    <script src="/Scripts/inicio.js"></script>
     <script>
         const routes = [
-            { path: '/AltaReclamo', component: Alta },
-            { path: '/VerAbiertos', component: Abiertos('<%= ResolveUrl("Abiertos.aspx/VerTodos") %>') }
+            { path: '/VerAbiertos', component: Abiertos('<%= ResolveUrl("Abiertos.aspx/VerTodos") %>', '<%= ResolveUrl("Abiertos.aspx/TodasIncidencias") %>', '<%= ResolveUrl("Abiertos.aspx/TodasPrioridades") %>', '<%= ResolveUrl("Abiertos.aspx/UsAAsignar") %>', '<%= ResolveUrl("Abiertos.aspx/AltaRec") %>') },
+            { path: '/VerCerrados', component: Cerrados('<%= ResolveUrl("Cerrados.aspx/VerTodos") %>') },
+            { path: '/', component: Inicio() }
         ]
         const router = new VueRouter({
           routes
@@ -101,6 +117,7 @@
                 }
             },
             created() {
+                document.title = 'Inicio'
                 fetch('<%= ResolveUrl("Default.aspx/ElUsuario") %>', {
                     method: 'POST',
                     body: `{}`,

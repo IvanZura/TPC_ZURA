@@ -129,6 +129,36 @@ namespace Negocio
                 conexion.Close();
             }
         }
+        public Usuarios AAsignar()
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+            Usuarios nuevo;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select us.id IDAAsignar, count(rc.ID) from Empleados as emp inner join Usuarios as us on us.IDPersona = emp.IDPersona inner join Reclamos rc on rc.IDAsignado = us.ID where emp.IDPuesto = 2 and us.Activo = 1 group by us.ID order by count(rc.ID) asc";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+
+                nuevo = new Usuarios();
+                nuevo.id = (int)lector["IDAAsignar"];
+                return nuevo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
         public List<TipoIncidencia> ListarIncidencias()
         {
             SqlConnection conexion = new SqlConnection();
@@ -240,7 +270,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado not in (3, 6) and rc.IDCreador = " + IDCreador;
+                comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado not in (3, 6) and rc.IDCliente = " + IDCreador;
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -368,7 +398,7 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado in (3, 6) and rc.IDCreador = " + IDCreador;
+                comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado in (3, 6) and rc.IDCliente = " + IDCreador;
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();

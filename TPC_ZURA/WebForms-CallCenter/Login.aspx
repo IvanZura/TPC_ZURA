@@ -41,6 +41,7 @@
                               <v-card-actions>
                                 <v-spacer></v-spacer>
                                 <v-btn color="primary" @click="Login">Login</v-btn>
+                                <v-btn color="primary" flat href="/Registrarse">Registrese</v-btn>
                               </v-card-actions>
                             </v-card>
                           </v-flex>
