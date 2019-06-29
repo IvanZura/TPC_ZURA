@@ -22,6 +22,29 @@
 <body>
     <div id="app">
         <v-app id="inspire">
+                <v-dialog
+                  v-model="dialogoFinal"
+                  max-width="290"
+                  persistent
+                >
+                  <v-card>
+                    <v-card-title class="headline">Creado !</v-card-title>
+
+                    <v-card-text>
+                      Su usuario fue correctamente creado ! Pulse el boton aceptar para continuar
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="primary"
+                        dark
+                        href="/Login"
+                      >
+                        Aceptar
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
                 <v-snackbar v-model="alerta.estado" :color="alerta.color" top right :timeout="alerta.timeout"> {{ alerta.text }} </v-snackbar>
                 <v-dialog
                   v-model="carga"
@@ -70,41 +93,39 @@
                                       
                                     <v-btn color="primary" @click="PasoUno()">Continue</v-btn>
 
-                                    <v-btn flat>Cancel</v-btn>
+                                    <v-btn flat href="/Login">Cancel</v-btn>
                                   </v-stepper-content>
 
                                   <v-stepper-content step="2">
-                                    <v-card
-                                      class="mb-5"
-                                      color="grey lighten-1"
-                                      height="200px"
-                                    ></v-card>
+                                    <v-card class="mb-5">
+                                        <h3> Para continuar se le pedira que introduzca su fecha de nacimiento para corroborar que es usted </h3>
+                                        <v-menu v-model="inicial.menu" :close-on-content-click="false" :nudge-right="40" lazy transition="scale-transition" offset-y full-width min-width="290px">
+                                          <template v-slot:activator="{ on }">
+                                            <v-text-field v-model="inicial.date" label="Fecha nacimiento" prepend-icon="event" readonly v-on="on"></v-text-field>
+                                          </template>
+                                          <v-date-picker v-model="inicial.date" @input="inicial.menu = false"></v-date-picker>
+                                        </v-menu>
+                                    </v-card>
 
-                                    <v-btn
-                                      color="primary"
-                                      @click="e1 = 3"
-                                    >
-                                      Continue
-                                    </v-btn>
+                                    <v-btn color="primary" @click="PasoDos()">Continue</v-btn>
 
-                                    <v-btn flat>Cancel</v-btn>
+                                    <v-btn flat @click="e1 = 1">Volver</v-btn>
                                   </v-stepper-content>
 
                                   <v-stepper-content step="3">
-                                    <v-card
-                                      class="mb-5"
-                                      color="grey lighten-1"
-                                      height="200px"
-                                    ></v-card>
+                                    <v-card class="mb-5">
+                                        <v-card-title>
+                                            Para finalizar, ingrese un usuario y contraseña que solo usted sepa.
+                                        </v-card-title>
+                                        <v-card-text>
+                                            <v-text-field v-model="alta.usuario" label="Usuario" @keyup.enter="PasoTres()"></v-text-field>
+                                            <v-text-field type="password" v-model="alta.pass" label="Contraseña" @keyup.enter="PasoTres()"></v-text-field>
+                                        </v-card-text>
 
-                                    <v-btn
-                                      color="primary"
-                                      @click="e1 = 1"
-                                    >
-                                      Continue
-                                    </v-btn>
+                                    </v-card>
 
-                                    <v-btn flat>Cancel</v-btn>
+                                    <v-btn color="primary" @click="PasoTres()">Registrar</v-btn>
+                                    <v-btn flat @click="e1 = 2">Volver</v-btn>
                                   </v-stepper-content>
                                 </v-stepper-items>
                               </v-stepper>
@@ -120,6 +141,15 @@
         let app = new Vue({
             el: '#app',
             data: {
+                dialogoFinal: false,
+                alta: {
+                    usuario: '',
+                    pass: ''
+                },
+                inicial: {
+                    menu: false,
+                    date: ''
+                },
                 e1: 0,
                 carga: false,
                 primerpaso: '',
@@ -167,7 +197,6 @@
                                 .then(response => {
                                     return response.json()
                                 }).then(resp => {
-                                    console.log(resp.d)
                                     if (resp.d == true) {
                                         this.SetSnack('El cliente ya tiene un usuario', 'error')
                                         this.carga = false
@@ -181,6 +210,83 @@
                         }).catch(err => {
                             this.carga = false
                             this.SetSnack('Ocurrio un error', 'error')
+                        })
+                    }
+                },
+                DateToDate(fecha) {
+                    fecha = new Date(fecha.match(/\d+/)[0] * 1)
+                    let año = `${fecha.getFullYear()}`
+                    let mes
+                    let dia
+                    if (fecha.getMonth() + 1 < 10) {
+                        mes = `0${fecha.getMonth() + 1}`
+                    } else {
+                        mes = `${fecha.getMonth() + 1}`
+                    }
+                    if (fecha.getDate() < 10) {
+                        dia = `0${fecha.getDate()}`
+                    } else {
+                        dia = `${fecha.getDate()}`
+                    }
+                    return `${año}-${mes}-${dia}`
+                    
+                },
+                PasoDos() {
+                    if (this.inicial.date == '') {
+                        this.SetSnack('Por favor ingrese una fecha', 'warning')
+                    } else {
+                        if (this.inicial.date == this.DateToDate(this.cliente.fnacimiento)) {
+                            this.e1 = 3
+                        } else {
+                            this.SetSnack('La fecha no es correcta', 'error')
+                            this.inicial.date = ''
+                        }
+                    }
+                },
+                PasoTres() {
+                    if (this.alta.usuario == '' || this.alta.pass == '') {
+                        this.SetSnack('Complete todos los campos', 'error')
+                    } else {
+                        fetch('<%= ResolveUrl("Registrarse.aspx/ExisteNombreUsuario") %>', {
+                            method: 'POST',
+                            body: `{usuario: '${this.alta.usuario}'}`,
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            return response.json()
+                        }).then(res => {
+                            res = res.d
+                            if (res == true) {
+                                this.SetSnack('El nombre de usuario ya esta registrado', 'error')
+                            } else {
+                                this.carga = true
+                                fetch('<%= ResolveUrl("Registrarse.aspx/InsertarUsuario") %>', {
+                                    method: 'POST',
+                                    body: `{IDPersona: ${this.cliente.idpersona}, Usuario: '${this.alta.usuario}',
+                                            Pass: '${this.alta.pass}'}`,
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                })
+                                .then(response => {
+                                    return response.json()
+                                }).then(res => {
+                                    res = res.d
+                                    if (res == true) {
+                                        this.carga = false
+                                        this.alta.usuario = ''
+                                        this.alta.pass = ''
+                                        this.inicial.date = ''
+                                        this.primerpaso = ''
+                                        this.dialogoFinal = true
+                                    } else {
+                                        this.carga = false
+                                        this.SetSnack('Ocurrio un error', 'error')
+                                    }
+                                })
+                            }
                         })
                     }
                 }

@@ -183,6 +183,39 @@ namespace Negocio
                 conexion.Close();
             }
         }
+        public bool ExisteNombreUsuario(string usuario)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select * from usuarios where activo = 1 and Usuario = '" + usuario + "'";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+
+                if (lector.HasRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
         public Usuarios LoginUsuario(string usuDNI, string pass)
         {
             SqlConnection conexion = new SqlConnection();

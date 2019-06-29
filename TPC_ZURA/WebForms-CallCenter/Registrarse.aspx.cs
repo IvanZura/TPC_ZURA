@@ -33,5 +33,24 @@ namespace WebForms_CallCenter
             persona.idpersona = idPersona;
             return negocio.ExisteUsuario(persona);
         }
+
+        [WebMethod]
+        public static bool ExisteNombreUsuario(string usuario)
+        {
+            UsuariosNegocio negocio = new UsuariosNegocio();
+            return negocio.ExisteNombreUsuario(usuario);
+        }
+
+        [WebMethod]
+        public static bool InsertarUsuario(int IDPersona, string Usuario, string Pass)
+        {
+            UsuariosNegocio negocio = new UsuariosNegocio();
+            Personas persona = new Personas();
+            persona.idpersona = IDPersona;
+            Usuarios usuario = new Usuarios();
+            usuario.usuario = Usuario;
+            usuario.pass = Pass;
+            return negocio.InsertarUsuario(usuario, persona);
+        }
     }
 }
