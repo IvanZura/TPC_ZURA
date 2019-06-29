@@ -183,6 +183,40 @@ namespace Negocio
                 conexion.Close();
             }
         }
+        public int UsuarioPorPersona(int IDPersona)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select ID from usuarios where activo = 1 and IDPersona = " + IDPersona;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+
+                if (lector.HasRows)
+                {
+                    return (int)lector["ID"];
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
         public bool ExisteNombreUsuario(string usuario)
         {
             SqlConnection conexion = new SqlConnection();

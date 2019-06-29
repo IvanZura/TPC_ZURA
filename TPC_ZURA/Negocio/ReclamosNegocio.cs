@@ -159,6 +159,39 @@ namespace Negocio
                 conexion.Close();
             }
         }
+        public bool AsignarReclamo(int IDReclamo, int IDAsignar)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "update Reclamos set IDAsignado = "+IDAsignar+", IDEstado = 5 where ID = " + IDReclamo;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+
+                if (lector.RecordsAffected > 0)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
         public List<TipoIncidencia> ListarIncidencias()
         {
             SqlConnection conexion = new SqlConnection();

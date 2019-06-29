@@ -136,5 +136,35 @@ namespace WinForms_CallCenter
                 MessageBox.Show("Hubo un problema", "Re Abrir", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void btnReAsignar_Click(object sender, EventArgs e)
+        {
+            EmpleadosNegocio negoemp = new EmpleadosNegocio();
+            UsuariosNegocio negousu = new UsuariosNegocio();
+            if (negoemp.PuestoPorEmpleado(this.usuario.id) == 2)
+            {
+                MessageBox.Show("Usted no puede re-asignar.", "Permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                BuscaEmpleado busca = new BuscaEmpleado();
+                busca.ShowDialog();
+                int idpersona = busca.PersonaSeleccionada;
+                int idusario = negousu.UsuarioPorPersona(idpersona);
+                if (idusario == 0)
+                {
+                    MessageBox.Show("La persona no tiene usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else
+                {
+                    if(negocio.AsignarReclamo(this.reclamo.id, idusario))
+                    {
+                        MessageBox.Show("El reclamo se re-asigno correctamente", "Re-Asignado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    } else
+                    {
+                        MessageBox.Show("Ocurrio un problema", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
     }
 }

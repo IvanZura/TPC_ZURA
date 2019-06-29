@@ -54,5 +54,22 @@ namespace WinForms_CallCenter
             this.cliente = (Clientes)dgvClientes.CurrentRow.DataBoundItem;
             this.Close();
         }
+
+        private void txtDNI_TextChanged(object sender, EventArgs e)
+        {
+            if (txtDNI.Text == "")
+            {
+                dgvClientes.DataSource = this.listadoClientes;
+            }
+            else
+            {
+                if (txtDNI.Text.Length >= 3)
+                {
+                    List<Clientes> lista;
+                    lista = this.listadoClientes.FindAll(X => X.DNI.Contains(txtDNI.Text));
+                    dgvClientes.DataSource = lista;
+                }
+            }
+        }
     }
 }

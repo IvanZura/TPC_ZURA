@@ -330,6 +330,7 @@
             this.btnReAsignar.TabIndex = 30;
             this.btnReAsignar.Text = "ReAsignar";
             this.btnReAsignar.UseVisualStyleBackColor = true;
+            this.btnReAsignar.Click += new System.EventHandler(this.btnReAsignar_Click);
             // 
             // btnReAbrir
             // 

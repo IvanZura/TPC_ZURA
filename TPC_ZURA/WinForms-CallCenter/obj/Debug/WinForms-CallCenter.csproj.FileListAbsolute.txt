@@ -45,3 +45,4 @@ C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinFor
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.Login.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.ReclamosListadoCerrado.resources
 C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.VerReclamo.resources
+C:\Users\Z\Documents\UTN-Tercer-Cuatrimestre\Prog3\Cuatrimestral\TPC_ZURA\WinForms-CallCenter\obj\Debug\WinForms_CallCenter.BuscaEmpleado.resources
