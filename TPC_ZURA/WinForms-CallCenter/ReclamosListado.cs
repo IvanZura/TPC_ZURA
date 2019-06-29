@@ -27,10 +27,10 @@ namespace WinForms_CallCenter
         {
             try
             {
-                this.listadoReclamos = negocio.ListarReclamos();
+                this.listadoReclamos = negocio.ListarReclamos(this.usuario);
                 dgvReclamos.DataSource = this.listadoReclamos;
                 dgvReclamos.Columns[0].Width = 60;
-                dgvReclamos.Columns[0].HeaderText = "Ticket N°";
+                dgvReclamos.Columns[0].HeaderText = "Reclamo N°";
                 dgvReclamos.Columns[1].Visible = false;
                 dgvReclamos.Columns[5].Width = 300;
                 dgvReclamos.Columns[6].Visible = false;

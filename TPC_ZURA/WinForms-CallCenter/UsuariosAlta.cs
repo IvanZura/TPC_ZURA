@@ -87,14 +87,21 @@ namespace WinForms_CallCenter
                 Personas elegido = (Personas)cboPersonas.SelectedItem;
                 if (!negocio.ExisteUsuario(elegido))
                 {
-                    if (this.negocio.InsertarUsuario(nuevo, elegido))
+                    if (this.negocio.ExisteNombreUsuario(nuevo.usuario))
                     {
-                        MessageBox.Show("Alta correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
-                    }
-                    else
+                        MessageBox.Show("Ya existe este usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    } else
                     {
-                        MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (this.negocio.InsertarUsuario(nuevo, elegido))
+                        {
+                            MessageBox.Show("Alta correcta", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ocurrio un error", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 } else
                 {

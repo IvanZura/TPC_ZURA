@@ -28,7 +28,7 @@ namespace WinForms_CallCenter
         {
             try
             {
-                this.listadoReclamos = negocio.ListarReclamosCerrados();
+                this.listadoReclamos = negocio.ListarReclamosCerrados(this.usuario);
                 dgvReclamosCerrados.DataSource = this.listadoReclamos;
                 dgvReclamosCerrados.Columns[0].Width = 60;
                 dgvReclamosCerrados.Columns[0].HeaderText = "Ticket N°";

@@ -32,7 +32,7 @@ namespace WinForms_CallCenter
         {
             if (this.ValidaCampos())
             {
-                Usuarios usuario = negocio.LoginUsuario(txtUsuDNI.Text, txtPass.Text);
+                Usuarios usuario = negocio.LoginUsuario(txtUsuDNI.Text, txtPass.Text, 2);
                 if (usuario.id != 0)
                 {
                     Principal principal = new Principal(usuario);

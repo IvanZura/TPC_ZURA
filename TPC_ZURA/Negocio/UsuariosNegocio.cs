@@ -216,8 +216,10 @@ namespace Negocio
                 conexion.Close();
             }
         }
-        public Usuarios LoginUsuario(string usuDNI, string pass)
+        public Usuarios LoginUsuario(string usuDNI, string pass, int op)
         {
+            //1 - cliente
+            //2 - empleado
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
@@ -227,9 +229,18 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select p.DNI, us.ID, us.IDPersona, us.Usuario, us.FechaAlta from Usuarios us inner join personas p " +
-                    "on p.ID = us.IDPersona where (p.DNI = '" + usuDNI + "' or us.Usuario = '" + usuDNI + "') " +
-                    "and pass='" + pass + "' and activo = 1";
+                if (op == 1)
+                {
+                    comando.CommandText = "select cl.ID idcliente, p.DNI, us.ID, us.IDPersona, us.Usuario, us.FechaAlta from Usuarios us inner join personas p " +
+                    "on p.ID = us.IDPersona inner join clientes cl on cl.IDPersona = p.ID where (p.DNI = '" + usuDNI + "' or us.Usuario = '" + usuDNI + "') " +
+                    "and pass='" + pass + "' and us.activo = 1";
+                } else
+                {
+                    comando.CommandText = "select emp.ID idempleado, p.DNI, us.ID, us.IDPersona, us.Usuario, us.FechaAlta from Usuarios us inner join personas p " +
+                    "on p.ID = us.IDPersona inner join empleados emp on emp.IDPersona = p.ID where (p.DNI = '" + usuDNI + "' or us.Usuario = '" + usuDNI + "') " +
+                    "and pass='" + pass + "' and us.activo = 1";
+                }
+                
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -243,6 +254,14 @@ namespace Negocio
                     encontrado.usuario = lector["usuario"].ToString();
                     encontrado.altaUsuario = (DateTime)lector["FechaAlta"];
                     encontrado.DNI = lector["DNI"].ToString();
+                    if (op == 1)
+                    {
+                        encontrado.Cliente = (int)lector["idcliente"];
+                    } else
+                    {
+                        encontrado.Empleado = (int)lector["idempleado"];
+                    }
+                    
                     return encontrado;
                 }
                 else

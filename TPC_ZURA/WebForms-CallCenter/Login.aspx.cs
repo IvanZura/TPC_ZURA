@@ -29,7 +29,7 @@ namespace WebForms_CallCenter
         public static Usuarios LoginUsu(string usu, string pass)
         {
             UsuariosNegocio negocio = new UsuariosNegocio();
-            Usuarios local = negocio.LoginUsuario(usu, pass);
+            Usuarios local = negocio.LoginUsuario(usu, pass, 1);
             if (local.id != 0)
             {
                 HttpContext.Current.Session["Usuarios"] = local;

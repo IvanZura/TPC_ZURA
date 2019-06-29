@@ -247,5 +247,39 @@ namespace Negocio
                 return false;
             }
         }
+        public int PuestoPorEmpleado(int IDEmpleado)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "select IDPuesto from empleados where ID = " + IDEmpleado;
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.HasRows)
+                {
+                    return (int)lector["IDPuesto"];
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+
+        }
     }
 }

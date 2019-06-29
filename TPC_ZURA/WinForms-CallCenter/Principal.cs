@@ -36,14 +36,29 @@ namespace WinForms_CallCenter
 
         private void listadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListadoUS = new UsuariosListado();
-            ListadoUS.Show();
+            EmpleadosNegocio negoemp = new EmpleadosNegocio();
+            int per = negoemp.PuestoPorEmpleado(this.usuario.Empleado);
+            if (per == 2 || per == 3)
+            {
+                MessageBox.Show("Usted no tiene permisos", "Permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                ListadoUS = new UsuariosListado();
+                ListadoUS.Show();
+            }
         }
 
         private void listadoToolStripMenuItem3_Click(object sender, EventArgs e)
         {
-            ListadoEMP = new EmpleadosListado();
-            ListadoEMP.Show();
+            EmpleadosNegocio negoemp = new EmpleadosNegocio();
+            if (negoemp.PuestoPorEmpleado(this.usuario.Empleado) == 2)
+            {
+                MessageBox.Show("Usted no tiene permisos", "Permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                ListadoEMP = new EmpleadosListado();
+                ListadoEMP.Show();
+            }
         }
 
         private void listadoToolStripMenuItem1_Click(object sender, EventArgs e)

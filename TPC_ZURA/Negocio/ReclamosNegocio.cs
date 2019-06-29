@@ -194,19 +194,27 @@ namespace Negocio
                 conexion.Close();
             }
         }
-        public List<Reclamo> ListarReclamos()
+        public List<Reclamo> ListarReclamos(Usuarios usuarioVer)
         {
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
             List<Reclamo> listado = new List<Reclamo>();
+            EmpleadosNegocio negocioempleado = new EmpleadosNegocio();
             Reclamo nuevo;
 
             try
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado not in (3, 6)";
+                if (negocioempleado.PuestoPorEmpleado(usuarioVer.Empleado) == 2)
+                {
+                    comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado not in (3, 6) and rc.IDAsignado = " + usuarioVer.id;
+                } else
+                {
+                    comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado not in (3, 6)";
+                }
+                
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -322,19 +330,28 @@ namespace Negocio
                 conexion.Close();
             }
         }
-        public List<Reclamo> ListarReclamosCerrados()
+        public List<Reclamo> ListarReclamosCerrados(Usuarios usuarioVer)
         {
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
             List<Reclamo> listado = new List<Reclamo>();
+            EmpleadosNegocio negocioempleado = new EmpleadosNegocio();
             Reclamo nuevo;
 
             try
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado in (3, 6)";
+                //comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado in (3, 6)";
+                if (negocioempleado.PuestoPorEmpleado(usuarioVer.Empleado) == 2)
+                {
+                    comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado in (3, 6) and rc.IDAsignado = " + usuarioVer.id;
+                }
+                else
+                {
+                    comando.CommandText = "select rc.*, es.Nombre as Estado, tin.Nombre as Incidencia, pr.Nombre as Prioridad, (select p.Nombre + ' ' + p.Apellido + ' - ' + p.DNI as NombreCompleto from clientes as cl inner join Personas as p on p.ID = cl.IDPersona where cl.ID = rc.IDCliente) as Cliente, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCreador) as Creador, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDAsignado) as Asignado, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDReabrio) as Reabrio, (select p.DNI from Usuarios as us inner join Personas as p on p.ID = us.IDPersona where us.ID = rc.IDCerro) as Cerro from reclamos as rc inner join Estados as es on es.ID = rc.IDEstado inner join TiposIncidencias as tin on tin.ID = rc.IDIncidencia inner join Prioridades as pr on pr.ID = rc.IDPrioridad where rc.IDEstado in (3, 6)";
+                }
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
