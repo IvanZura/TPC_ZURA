@@ -51,6 +51,7 @@ namespace WinForms_CallCenter
                 txtSolucion.Enabled = false;
             }
             if (reclamo.Asignado.id != 0) txtAsignado.Text = reclamo.Asignado.DNI;
+            if (reclamo.Reabrio.id != 0) txtSolucion.Enabled = true;
         }
 
         public void CargarPrioridades()
