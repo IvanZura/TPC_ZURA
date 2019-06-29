@@ -6,11 +6,52 @@ using System.Threading.Tasks;
 using Dominio;
 using AccesoDatos;
 using System.Data.SqlClient;
+using System.Net;
+using System.Net.Mail;
 
 namespace Negocio
 {
     public class ReclamosNegocio
     {
+        public void EnviarMail(string email, string nombre, string apellido, int reclam, Reclamo reclamo, int op)
+        {
+            var fromAddress = new MailAddress("tpwebgarciazura@gmail.com", "TPWEB");
+            var toAddress = new MailAddress(email, nombre + " " + apellido);
+            const string fromPassword = "TPWEB1234";
+            string subject = "Reclamo N° " + reclam.ToString() + " - " + reclamo.Titulo.ToString();
+            string body = "";
+            if (op == 0)
+            {
+                body = "Usted ha dado de alta un nuevo reclamo con mensaje: " + reclamo.problematica;
+            }
+            else if (op == 1)
+            {
+                body = "Su reclamo ha concluido, los comentarios: " +  reclamo.solucion;
+            }
+            else if (op == 2)
+            {
+                body = "Su reclamo ha sido re abierto";
+            }
+
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(message);
+            }
+        }
         public bool CerrarReclamo(Reclamo reclamo, int op, Usuarios usuario)
         {
             SqlConnection conexion = new SqlConnection();
@@ -43,6 +84,29 @@ namespace Negocio
                 lector.Read();
                 if (lector.RecordsAffected > 0)
                 {
+                    if (op == 3 || op == 6)
+                    {
+                        conexion.Close();
+                        comando.CommandText = "select Nombre, Apellido, Email from clientes cl inner join personas p on p.id = cl.IDPersona where cl.ID = " + reclamo.cliente.idcliente;
+                        conexion.Open();
+                        lector = comando.ExecuteReader();
+                        lector.Read();
+                        if (lector.HasRows)
+                        {
+                            this.EnviarMail(lector["Email"].ToString(), lector["Nombre"].ToString(), lector["Apellido"].ToString(), reclamo.id, reclamo, 1);
+                        }
+                    } else if (op == 4)
+                    {
+                        conexion.Close();
+                        comando.CommandText = "select Nombre, Apellido, Email from clientes cl inner join personas p on p.id = cl.IDPersona where cl.ID = " + reclamo.cliente.idcliente;
+                        conexion.Open();
+                        lector = comando.ExecuteReader();
+                        lector.Read();
+                        if (lector.HasRows)
+                        {
+                            this.EnviarMail(lector["Email"].ToString(), lector["Nombre"].ToString(), lector["Apellido"].ToString(), reclamo.id, reclamo, 2);
+                        }
+                    }
                     return true;
                 }
                 else
@@ -78,6 +142,24 @@ namespace Negocio
                 lector.Read();
                 if (lector.RecordsAffected > 0)
                 {
+                    conexion.Close();
+                    comando.CommandText = "select max(ID) id from Reclamos where IDCliente = " + reclamo.cliente.idcliente;
+                    conexion.Open();
+                    lector = comando.ExecuteReader();
+                    lector.Read();
+                    if (lector.HasRows)
+                    {
+                        int reclam = (int)lector["id"];
+                        conexion.Close();
+                        comando.CommandText = "select Nombre, Apellido, Email from clientes cl inner join personas p on p.id = cl.IDPersona where cl.ID = " + reclamo.cliente.idcliente;
+                        conexion.Open();
+                        lector = comando.ExecuteReader();
+                        lector.Read();
+                        if (lector.HasRows)
+                        {
+                            this.EnviarMail(lector["Email"].ToString(), lector["Nombre"].ToString(), lector["Apellido"].ToString(), reclam, reclamo, 0);
+                        }
+                    }
                     return true;
                 }
                 else
