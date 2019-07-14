@@ -69,7 +69,9 @@ namespace WinForms_CallCenter
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Login login = new Login();
+            this.Hide();
+            login.Show();
         }
 
         private void listadoToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -91,7 +93,8 @@ namespace WinForms_CallCenter
 
         private void Principal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            Login login = new Login();
+            login.Show();
         }
     }
 }

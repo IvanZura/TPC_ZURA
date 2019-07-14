@@ -47,5 +47,10 @@ namespace WinForms_CallCenter
                 MessageBox.Show("Algun campo vacio", "Vacio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
