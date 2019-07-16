@@ -27,6 +27,15 @@ namespace WinForms_CallCenter
             ListadoCL = new ClientesListado();
             ListadoUS = new UsuariosListado();
             ListadoRC = new ReclamosListado(this.usuario);
+            EmpleadosNegocio negoemp = new EmpleadosNegocio();
+            if (negoemp.PuestoPorEmpleado(this.usuario.Empleado) == 2)
+            {
+                usuariosToolStripMenuItem.Enabled = false;
+                empleadosToolStripMenuItem.Enabled = false;
+            } else if (negoemp.PuestoPorEmpleado(this.usuario.Empleado) == 3)
+            {
+                usuariosToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
