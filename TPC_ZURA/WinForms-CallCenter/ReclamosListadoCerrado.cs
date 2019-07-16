@@ -38,6 +38,16 @@ namespace WinForms_CallCenter
                 //dgvUsuarios.Columns[1].Visible = false;
                 //dgvReclamosCerrados.Columns[9].Visible = false;
                 //dgvReclamosCerrados.Columns[10].Visible = false;
+                dgvReclamosCerrados.Columns[1].Visible = false;
+                dgvReclamosCerrados.Columns[6].Visible = false;
+                dgvReclamosCerrados.Columns[7].Visible = false;
+                dgvReclamosCerrados.Columns[8].Visible = false;
+                dgvReclamosCerrados.Columns[9].Visible = false;
+                dgvReclamosCerrados.Columns[10].Visible = false;
+                dgvReclamosCerrados.Columns[11].Visible = false;
+                dgvReclamosCerrados.Columns[12].Visible = false;
+                dgvReclamosCerrados.Columns[13].Visible = false;
+                dgvReclamosCerrados.Columns[14].Visible = false;
 
             }
             catch (Exception ex)

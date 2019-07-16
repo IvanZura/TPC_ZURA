@@ -34,6 +34,14 @@ namespace WinForms_CallCenter
                 dgvReclamos.Columns[1].Visible = false;
                 dgvReclamos.Columns[5].Width = 300;
                 dgvReclamos.Columns[6].Visible = false;
+                dgvReclamos.Columns[7].Visible = false;
+                dgvReclamos.Columns[8].Visible = false;
+                dgvReclamos.Columns[9].Visible = false;
+                dgvReclamos.Columns[10].Visible = false;
+                dgvReclamos.Columns[11].Visible = false;
+                dgvReclamos.Columns[12].Visible = false;
+                dgvReclamos.Columns[13].Visible = false;
+                dgvReclamos.Columns[14].Visible = false;
                 //dgvUsuarios.Columns[1].Visible = false;
                 //dgvUsuarios.Columns[3].Visible = false;
                 //dgvUsuarios.Columns[4].Visible = false;*/
