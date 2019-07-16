@@ -22,9 +22,17 @@ namespace WinForms_CallCenter
 
         private bool ValidaCampos()
         {
-            if (txtUsuDNI.Text == "") return false;
-            if (txtPass.Text == "") return false;
-
+            errorProvider1.Clear();
+            if (txtUsuDNI.Text == "")
+            {
+                errorProvider1.SetError(txtUsuDNI, "Falta usuario");
+                return false;
+            }
+            if (txtPass.Text == "") {
+                errorProvider1.SetError(txtPass, "Falta contraseña");
+                return false;
+            }
+            errorProvider1.Clear();
             return true;
         }
 
@@ -44,7 +52,7 @@ namespace WinForms_CallCenter
                 }
             } else
             {
-                MessageBox.Show("Algun campo vacio", "Vacio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Algun campo vacio", "Vacio", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

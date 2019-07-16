@@ -102,6 +102,7 @@ CREATE TABLE Reclamos (
 	FechaHora	datetime not null default(GETDATE()),
 	FechaHoraCerrado datetime not null default('1901-01-01'),
 	FechaHoraReAbierto datetime not null default('1901-01-01'),
+	CausaReAbrio	text null
 )
 
 go

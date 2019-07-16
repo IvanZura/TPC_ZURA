@@ -54,12 +54,14 @@ namespace WinForms_CallCenter
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             PersonasNegocio negocioPer = new PersonasNegocio();
             this.local = negocioPer.ExistePersona(txtDNI.Text);
 
             if (txtDNI.Text == "")
             {
-                MessageBox.Show("Dejo vacio el campo", "vacio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                errorProvider1.SetError(txtDNI, "Campo vacio");
+                //MessageBox.Show("Dejo vacio el campo", "vacio", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             negocio = new ClientesNegocio();
@@ -102,12 +104,33 @@ namespace WinForms_CallCenter
 
         private bool VerificarCampos()
         {
+            errorProvider1.Clear();
             bool valida = false;
-            if (txtNombre.Text == "") valida = true;
-            if (txtApellido.Text == "") valida = true;
-            if (txtEmail.Text == "") valida = true;
-            if (txtDNI.Text == "") valida = true;
-            if (txtTelefono.Text == "") valida = true;
+            if (txtNombre.Text == "")
+            {
+                errorProvider1.SetError(txtNombre, "Ingrese nombre");
+                valida = true;
+            }
+            if (txtApellido.Text == "")
+            {
+                errorProvider1.SetError(txtApellido, "Ingrese apellido");
+                valida = true;
+            }
+            if (txtEmail.Text == "")
+            {
+                errorProvider1.SetError(txtEmail, "Ingrese E-mail");
+                valida = true;
+            }
+            if (txtDNI.Text == "")
+            {
+                errorProvider1.SetError(txtDNI, "Ingrese dni");
+                valida = true;
+            }
+            if (txtTelefono.Text == "")
+            {
+                errorProvider1.SetError(txtTelefono, "Ingrese telefono");
+                valida = true;
+            }
             return valida;
         }
 
@@ -141,6 +164,7 @@ namespace WinForms_CallCenter
 
         private bool verificaMail()
         {
+            errorProvider1.Clear();
             string local = txtEmail.Text;
             string expresion = "\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
             if (Regex.IsMatch(local, expresion))
@@ -151,11 +175,13 @@ namespace WinForms_CallCenter
                 }
                 else
                 {
+                    errorProvider1.SetError(txtEmail, "Formato de E-mail inválido");
                     return false;
                 }
             }
             else
             {
+                errorProvider1.SetError(txtEmail, "Formato de E-mail inválido");
                 return false;
             }
         }
@@ -164,7 +190,7 @@ namespace WinForms_CallCenter
         {
             if (this.VerificarCampos())
             {
-                MessageBox.Show("Algun campo vacio", "Llene todo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Algun campo vacio", "Llene todo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!this.VerificaEdad())
@@ -174,7 +200,7 @@ namespace WinForms_CallCenter
             }
             if (!this.verificaMail())
             {
-                MessageBox.Show("Formato de E-mail inválido", "E-mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Formato de E-mail inválido", "E-mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (!this.mod)
