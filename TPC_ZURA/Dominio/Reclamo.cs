@@ -25,6 +25,11 @@ namespace Dominio
         public DateTime CerradoReclamo { get; set; }
         public DateTime ReAbiertoReclamo { get; set; }
 
+        public override string ToString()
+        {
+            return id.ToString();
+        }
+
         //public Reclamo (int ID, Clientes cliente, TipoIncidencia incidencia, Prioridad prioridad,
         //    string problematica, Usuarios creador, Estados estado)
         //{

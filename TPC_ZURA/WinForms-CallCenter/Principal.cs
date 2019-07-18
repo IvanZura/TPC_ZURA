@@ -30,11 +30,13 @@ namespace WinForms_CallCenter
             EmpleadosNegocio negoemp = new EmpleadosNegocio();
             if (negoemp.PuestoPorEmpleado(this.usuario.Empleado) == 2)
             {
+                auditoriasToolStripMenuItem.Enabled = false;
                 usuariosToolStripMenuItem.Enabled = false;
                 empleadosToolStripMenuItem.Enabled = false;
             } else if (negoemp.PuestoPorEmpleado(this.usuario.Empleado) == 3)
             {
                 usuariosToolStripMenuItem.Enabled = false;
+                auditoriasToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -53,7 +55,7 @@ namespace WinForms_CallCenter
             } else
             {
                 ListadoUS = new UsuariosListado();
-                ListadoUS.Show();
+                ListadoUS.ShowDialog();
             }
         }
 
@@ -66,14 +68,14 @@ namespace WinForms_CallCenter
             } else
             {
                 ListadoEMP = new EmpleadosListado();
-                ListadoEMP.Show();
+                ListadoEMP.ShowDialog();
             }
         }
 
         private void listadoToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ListadoCL = new ClientesListado();
-            ListadoCL.Show();
+            ListadoCL.ShowDialog();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,13 +88,13 @@ namespace WinForms_CallCenter
         private void listadoToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             ListadoRC = new ReclamosListado(this.usuario);
-            ListadoRC.Show();
+            ListadoRC.ShowDialog();
         }
 
         private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReclamosListadoCerrado ListadoRCCerrados = new ReclamosListadoCerrado(this.usuario);
-            ListadoRCCerrados.Show();
+            ListadoRCCerrados.ShowDialog();
         }
 
         private void Principal_Load(object sender, EventArgs e)
@@ -104,6 +106,21 @@ namespace WinForms_CallCenter
         {
             Login login = new Login();
             login.Show();
+        }
+
+        private void auditoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AuditoriasListado audit = new AuditoriasListado();
+            EmpleadosNegocio negoemp = new EmpleadosNegocio();
+            int per = negoemp.PuestoPorEmpleado(this.usuario.Empleado);
+            if (per == 2 || per == 3)
+            {
+                MessageBox.Show("Usted no tiene permisos", "Permisos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                audit.ShowDialog();
+            }
         }
     }
 }

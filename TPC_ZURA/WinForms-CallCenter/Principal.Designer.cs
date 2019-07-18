@@ -43,6 +43,7 @@
             this.listadoToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.spbCarga = new System.Windows.Forms.ToolStripProgressBar();
+            this.auditoriasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -51,6 +52,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.programaToolStripMenuItem,
+            this.auditoriasToolStripMenuItem,
             this.usuariosToolStripMenuItem,
             this.empleadosToolStripMenuItem,
             this.clientesToolStripMenuItem,
@@ -167,6 +169,13 @@
             this.spbCarga.Name = "spbCarga";
             this.spbCarga.Size = new System.Drawing.Size(100, 16);
             // 
+            // auditoriasToolStripMenuItem
+            // 
+            this.auditoriasToolStripMenuItem.Name = "auditoriasToolStripMenuItem";
+            this.auditoriasToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.auditoriasToolStripMenuItem.Text = "Auditorias";
+            this.auditoriasToolStripMenuItem.Click += new System.EventHandler(this.auditoriasToolStripMenuItem_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,6 +215,7 @@
         private System.Windows.Forms.ToolStripMenuItem listadoToolStripMenuItem3;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar spbCarga;
+        private System.Windows.Forms.ToolStripMenuItem auditoriasToolStripMenuItem;
     }
 }
 
