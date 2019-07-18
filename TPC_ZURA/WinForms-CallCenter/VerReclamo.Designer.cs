@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtProblematica = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,6 +60,10 @@
             this.btnReAsignar = new System.Windows.Forms.Button();
             this.btnReAbrir = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.txtReAbrio = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProblematica
@@ -288,7 +293,7 @@
             // 
             // btnResolver
             // 
-            this.btnResolver.Location = new System.Drawing.Point(12, 524);
+            this.btnResolver.Location = new System.Drawing.Point(12, 665);
             this.btnResolver.Name = "btnResolver";
             this.btnResolver.Size = new System.Drawing.Size(75, 23);
             this.btnResolver.TabIndex = 26;
@@ -298,7 +303,7 @@
             // 
             // btnCerrar
             // 
-            this.btnCerrar.Location = new System.Drawing.Point(93, 524);
+            this.btnCerrar.Location = new System.Drawing.Point(93, 665);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(75, 23);
             this.btnCerrar.TabIndex = 27;
@@ -324,7 +329,7 @@
             // 
             // btnReAsignar
             // 
-            this.btnReAsignar.Location = new System.Drawing.Point(174, 524);
+            this.btnReAsignar.Location = new System.Drawing.Point(174, 665);
             this.btnReAsignar.Name = "btnReAsignar";
             this.btnReAsignar.Size = new System.Drawing.Size(75, 23);
             this.btnReAsignar.TabIndex = 30;
@@ -334,7 +339,7 @@
             // 
             // btnReAbrir
             // 
-            this.btnReAbrir.Location = new System.Drawing.Point(255, 524);
+            this.btnReAbrir.Location = new System.Drawing.Point(255, 665);
             this.btnReAbrir.Name = "btnReAbrir";
             this.btnReAbrir.Size = new System.Drawing.Size(75, 23);
             this.btnReAbrir.TabIndex = 31;
@@ -344,7 +349,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(336, 524);
+            this.btnModificar.Location = new System.Drawing.Point(336, 665);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 32;
@@ -352,11 +357,37 @@
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // txtReAbrio
+            // 
+            this.txtReAbrio.Enabled = false;
+            this.txtReAbrio.Location = new System.Drawing.Point(12, 552);
+            this.txtReAbrio.Multiline = true;
+            this.txtReAbrio.Name = "txtReAbrio";
+            this.txtReAbrio.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtReAbrio.Size = new System.Drawing.Size(532, 107);
+            this.txtReAbrio.TabIndex = 33;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(12, 532);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(141, 17);
+            this.label12.TabIndex = 34;
+            this.label12.Text = "¿Porque re-abrio?";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // VerReclamo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 567);
+            this.ClientSize = new System.Drawing.Size(566, 700);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtReAbrio);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnReAbrir);
             this.Controls.Add(this.btnReAsignar);
@@ -391,6 +422,7 @@
             this.Name = "VerReclamo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VerReclamo";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,5 +461,8 @@
         private System.Windows.Forms.Button btnReAsignar;
         private System.Windows.Forms.Button btnReAbrir;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.TextBox txtReAbrio;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

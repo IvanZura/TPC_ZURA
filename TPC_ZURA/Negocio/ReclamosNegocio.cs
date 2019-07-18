@@ -30,7 +30,7 @@ namespace Negocio
             }
             else if (op == 2)
             {
-                body = "Su reclamo ha sido re abierto";
+                body = "Su reclamo ha sido re abierto, comentarios: " + reclamo.reabriotexto;
             }
 
 
@@ -75,7 +75,7 @@ namespace Negocio
                 if (op == 4)
                 {
                     comando.CommandText = "update Reclamos set IDEstado = " + op + ", IDReabrio =" + usuario.id + ", " +
-                    "FechaHoraReAbierto=GETDATE() where id = " + reclamo.id;
+                    "FechaHoraReAbierto=GETDATE(), CausaReAbrio = '"+reclamo.reabriotexto+"' where id = " + reclamo.id;
                 }
                 
                 comando.Connection = conexion;
@@ -151,6 +151,7 @@ namespace Negocio
                     {
                         int reclam = (int)lector["id"];
                         conexion.Close();
+                        this.InsertarMovimientoReclamo(reclam, reclamo.creador.id, reclamo.problematica, "Insertar");
                         comando.CommandText = "select Nombre, Apellido, Email from clientes cl inner join personas p on p.id = cl.IDPersona where cl.ID = " + reclamo.cliente.idcliente;
                         conexion.Open();
                         lector = comando.ExecuteReader();
@@ -160,6 +161,40 @@ namespace Negocio
                             this.EnviarMail(lector["Email"].ToString(), lector["Nombre"].ToString(), lector["Apellido"].ToString(), reclam, reclamo, 0);
                         }
                     }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+        public bool InsertarMovimientoReclamo(int IDReclamo, int IDUsuario, string Observaciones, string Accion)
+        {
+            SqlConnection conexion = new SqlConnection();
+            SqlCommand comando = new SqlCommand();
+            SqlDataReader lector;
+
+            try
+            {
+                conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
+                comando.CommandType = System.Data.CommandType.Text;
+                comando.CommandText = "insert into MovimientosReclamos (IDReclamo, IDUsuarioEjecuto, Observaciones, Accion) VALUES " +
+                    "("+IDReclamo+", "+IDUsuario+", '"+Observaciones+"', '"+Accion+"')";
+                comando.Connection = conexion;
+                conexion.Open();
+                lector = comando.ExecuteReader();
+                lector.Read();
+                if (lector.RecordsAffected > 0)
+                {
                     return true;
                 }
                 else
@@ -367,6 +402,7 @@ namespace Negocio
                     nuevo.AltaReclamo = (DateTime)lector["FechaHora"];
                     nuevo.ReAbiertoReclamo = (DateTime)lector["FechaHoraReAbierto"];
                     nuevo.CerradoReclamo = (DateTime)lector["FechaHoraCerrado"];
+                    nuevo.reabriotexto = lector["CausaReAbrio"].ToString();
 
                     listado.Add(nuevo);
                 }
@@ -431,6 +467,7 @@ namespace Negocio
                     nuevo.AltaReclamo = (DateTime)lector["FechaHora"];
                     nuevo.ReAbiertoReclamo = (DateTime)lector["FechaHoraReAbierto"];
                     nuevo.CerradoReclamo = (DateTime)lector["FechaHoraCerrado"];
+                    nuevo.reabriotexto = lector["CausaReAbrio"].ToString();
 
                     listado.Add(nuevo);
                 }
@@ -504,6 +541,7 @@ namespace Negocio
                     nuevo.AltaReclamo = (DateTime)lector["FechaHora"];
                     nuevo.ReAbiertoReclamo = (DateTime)lector["FechaHoraReAbierto"];
                     nuevo.CerradoReclamo = (DateTime)lector["FechaHoraCerrado"];
+                    nuevo.reabriotexto = lector["CausaReAbrio"].ToString();
 
                     listado.Add(nuevo);
                 }
@@ -568,6 +606,7 @@ namespace Negocio
                     nuevo.AltaReclamo = (DateTime)lector["FechaHora"];
                     nuevo.ReAbiertoReclamo = (DateTime)lector["FechaHoraReAbierto"];
                     nuevo.CerradoReclamo = (DateTime)lector["FechaHoraCerrado"];
+                    nuevo.reabriotexto = lector["CausaReAbrio"].ToString();
 
                     listado.Add(nuevo);
                 }

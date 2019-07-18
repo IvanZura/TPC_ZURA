@@ -15,6 +15,7 @@ namespace Dominio
         public Prioridad prioridad { get; set; }
         public string Titulo { get; set; }
         public string problematica { get; set; }
+        public string reabriotexto { get; set; }
         public Usuarios creador { get; set; }
         public Estados estado { get; set; }
         public Usuarios Reabrio { get; set; }

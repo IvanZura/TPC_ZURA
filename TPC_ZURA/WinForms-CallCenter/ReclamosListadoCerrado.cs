@@ -46,7 +46,7 @@ namespace WinForms_CallCenter
                 dgvReclamosCerrados.Columns[10].Visible = false;
                 dgvReclamosCerrados.Columns[11].Visible = false;
                 dgvReclamosCerrados.Columns[12].Visible = false;
-                dgvReclamosCerrados.Columns[13].Visible = false;
+                dgvReclamosCerrados.Columns[15].Visible = false;
                 dgvReclamosCerrados.Columns[14].Visible = false;
 
             }

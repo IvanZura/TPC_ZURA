@@ -34,6 +34,7 @@ namespace WinForms_CallCenter
             txtCliente.Text = reclamo.cliente.NombreCompleto;
             txtCreador.Text = reclamo.creador.DNI;
             dtpCreacion.Value = reclamo.AltaReclamo;
+            txtReAbrio.Text = reclamo.reabriotexto;
             dtpReAbierto.Value = reclamo.ReAbiertoReclamo; dtpReAbierto.Visible = true; lblReAbierto.Visible = true;
             dtpCerrado.Value = reclamo.CerradoReclamo; dtpCerrado.Visible = true; lblCerrado.Visible = true;
             if(op == 0)
@@ -51,7 +52,10 @@ namespace WinForms_CallCenter
                 txtSolucion.Enabled = false;
             }
             if (reclamo.Asignado.id != 0) txtAsignado.Text = reclamo.Asignado.DNI;
-            if (reclamo.Reabrio.id != 0) txtSolucion.Enabled = true;
+            if (reclamo.Reabrio.id != 0)
+            {
+                txtSolucion.Enabled = true;
+            }
         }
 
         public void CargarPrioridades()
@@ -76,9 +80,10 @@ namespace WinForms_CallCenter
         {
             if (txtSolucion.Text == "")
             {
-                MessageBox.Show("Indique una solucion", "Solucion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider1.SetError(txtSolucion, "Complete este campo");
             } else
             {
+                errorProvider1.Clear();
                 this.reclamo.solucion = txtSolucion.Text;
                 if (negocio.CerrarReclamo(this.reclamo, 6, this.usuario))
                 {
@@ -95,10 +100,11 @@ namespace WinForms_CallCenter
         {
             if (txtSolucion.Text == "")
             {
-                MessageBox.Show("Indique una explicacion del porque se cierra", "Cerrar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider1.SetError(txtSolucion, "Complete este campo");
             }
             else
             {
+                errorProvider1.Clear();
                 this.reclamo.solucion = txtSolucion.Text;
                 if (negocio.CerrarReclamo(this.reclamo, 3, this.usuario))
                 {
@@ -127,14 +133,29 @@ namespace WinForms_CallCenter
 
         private void btnReAbrir_Click(object sender, EventArgs e)
         {
-            if (negocio.CerrarReclamo(this.reclamo, 4, this.usuario))
+            if (txtReAbrio.Enabled == false)
             {
-                MessageBox.Show("Se re-abrio el ticket", "Re abrir", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
-            }
-            else
+                txtReAbrio.Enabled = true;
+                MessageBox.Show("Se habilito el campo de porque se re-abre, complete justificando el porque y luego vuelva a presionar Re-Abrir", "INFO", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            } else
             {
-                MessageBox.Show("Hubo un problema", "Re Abrir", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (txtReAbrio.Text == "")
+                {
+                    errorProvider1.SetError(txtReAbrio, "Complete este campo");
+                } else
+                {
+                    errorProvider1.Clear();
+                    this.reclamo.reabriotexto = txtReAbrio.Text;
+                    if (negocio.CerrarReclamo(this.reclamo, 4, this.usuario))
+                    {
+                        MessageBox.Show("Se re-abrio el ticket", "Re abrir", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hubo un problema", "Re Abrir", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
         }
 

@@ -107,6 +107,17 @@ CREATE TABLE Reclamos (
 
 go
 
+CREATE TABLE MovimientosReclamos (
+	ID	int primary key identity(1, 1) not null,
+	IDReclamo	int foreign key references Reclamos(ID),
+	IDUsuarioEjecuto	int foreign key references Usuarios(ID),
+	Observaciones	text null,
+	FechaHora	datetime not null default(GETDATE()),
+	Accion	text null
+)
+
+go
+
 
 INSERT INTO Personas (Nombre, Apellido, FNacimiento, Email, Telefono, DNI)
 VALUES ('Ivan', 'Zura', '1995/10/20', 'no@no.com', 1125263598, '39148492'), ('Maxi', 'Sar', '01/01/1901', 'prog3@JA.com', 1188888888, '35123123')

@@ -40,7 +40,7 @@ namespace WinForms_CallCenter
                 dgvReclamos.Columns[10].Visible = false;
                 dgvReclamos.Columns[11].Visible = false;
                 dgvReclamos.Columns[12].Visible = false;
-                dgvReclamos.Columns[13].Visible = false;
+                dgvReclamos.Columns[15].Visible = false;
                 dgvReclamos.Columns[14].Visible = false;
                 //dgvUsuarios.Columns[1].Visible = false;
                 //dgvUsuarios.Columns[3].Visible = false;
