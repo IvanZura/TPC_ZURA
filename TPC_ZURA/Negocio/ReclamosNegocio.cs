@@ -62,22 +62,37 @@ namespace Negocio
             {
                 conexion.ConnectionString = AccesoDatosManager.cadenaConexion;
                 comando.CommandType = System.Data.CommandType.Text;
+                string observacion = "";
+                string accion = "";
                 if (op == 6 || op == 3)
                 {
+                    if(op == 6)
+                    {
+                        accion = "Resolvio";
+                    } else if (op == 3)
+                    {
+                        accion = "Cerro";
+                    }
+                    observacion = reclamo.solucion;
                     comando.CommandText = "update Reclamos set IDEstado = "+op+", Solucion = '"+reclamo.solucion+"', " +
                     "IDCerro = "+usuario.id+", FechaHoraCerrado = Getdate() where id = "+ reclamo.id;
                 }
                 if (op == 2)
                 {
+                    observacion = "Cambio a prioridad: " + reclamo.prioridad.tipo + " - " + reclamo.prioridad.nombre + " | incidencia: " +
+                        "" + reclamo.incidencia.tipo + " - " + reclamo.incidencia.nombre + ".";
+                    accion = "Modifico el ticket - en analisis";
                     comando.CommandText = "update Reclamos set IDEstado = " + op + ", IDPrioridad ="+reclamo.prioridad.tipo+", " +
                     "IDIncidencia="+reclamo.incidencia.tipo+" where id = " + reclamo.id;
                 }
                 if (op == 4)
                 {
+                    observacion = reclamo.reabriotexto;
+                    accion = "ReAbrio";
                     comando.CommandText = "update Reclamos set IDEstado = " + op + ", IDReabrio =" + usuario.id + ", " +
                     "FechaHoraReAbierto=GETDATE(), CausaReAbrio = '"+reclamo.reabriotexto+"' where id = " + reclamo.id;
                 }
-                
+                this.InsertarMovimientoReclamo(reclamo.id, usuario.id, observacion, accion);
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -276,7 +291,7 @@ namespace Negocio
                 conexion.Close();
             }
         }
-        public bool AsignarReclamo(int IDReclamo, int IDAsignar)
+        public bool AsignarReclamo(int IDReclamo, int IDAsignar, Usuarios usuario)
         {
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
@@ -288,6 +303,8 @@ namespace Negocio
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "update Reclamos set IDAsignado = "+IDAsignar+", IDEstado = 5 where ID = " + IDReclamo;
                 comando.Connection = conexion;
+                string observacion = "Se asigno el reclamo al usuario " + IDAsignar;
+                this.InsertarMovimientoReclamo(IDReclamo, usuario.id, observacion, "Asigno reclamo");
                 conexion.Open();
                 lector = comando.ExecuteReader();
                 lector.Read();

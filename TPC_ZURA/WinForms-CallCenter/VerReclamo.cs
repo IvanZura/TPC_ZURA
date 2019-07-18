@@ -177,7 +177,7 @@ namespace WinForms_CallCenter
                     MessageBox.Show("La persona no tiene usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } else
                 {
-                    if(negocio.AsignarReclamo(this.reclamo.id, idusario))
+                    if(negocio.AsignarReclamo(this.reclamo.id, idusario, this.usuario))
                     {
                         MessageBox.Show("El reclamo se re-asigno correctamente", "Re-Asignado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
