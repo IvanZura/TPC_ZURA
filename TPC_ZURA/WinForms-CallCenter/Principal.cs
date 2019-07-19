@@ -104,8 +104,15 @@ namespace WinForms_CallCenter
 
         private void Principal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Login login = new Login();
-            login.Show();
+            DialogResult salida = MessageBox.Show("¿Está seguro de salir?", "Salida", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (salida != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            } else
+            {
+                Login login = new Login();
+                login.Show();
+            }
         }
 
         private void auditoriasToolStripMenuItem_Click(object sender, EventArgs e)
