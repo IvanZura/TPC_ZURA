@@ -75,5 +75,22 @@ namespace WinForms_CallCenter
             }
             
         }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == "")
+            {
+                dgvReclamosCerrados.DataSource = this.listadoReclamos;
+            }
+            else
+            {
+                if (txtBuscar.Text.Length >= 0)
+                {
+                    List<Reclamo> lista;
+                    lista = this.listadoReclamos.FindAll(X => X.id.ToString().Contains(txtBuscar.Text) || X.problematica.Contains(txtBuscar.Text));
+                    dgvReclamosCerrados.DataSource = lista;
+                }
+            }
+        }
     }
 }

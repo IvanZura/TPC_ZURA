@@ -68,6 +68,7 @@ namespace WinForms_CallCenter
         {
             if (this.ValidaCampos())
             {
+                errorProvider1.Clear();
                 Reclamo reclamo = new Reclamo();
                 reclamo.cliente = new Clientes();
                 reclamo.cliente.idcliente = this.cliente.idcliente;
@@ -92,7 +93,19 @@ namespace WinForms_CallCenter
             }
             else
             {
-                MessageBox.Show("Falta llenar algun campo", "Vacio", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider1.Clear();
+                if (txtCliente.Text == "")
+                {
+                    errorProvider1.SetError(txtCliente, "Llene este campo");
+                }
+                if (txtTitulo.Text == "")
+                {
+                    errorProvider1.SetError(txtTitulo, "Llene este campo");
+                }
+                if (txtProblematica.Text == "")
+                {
+                    errorProvider1.SetError(txtProblematica, "Llene este campo");
+                }
             }
         }
     }

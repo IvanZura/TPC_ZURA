@@ -51,8 +51,17 @@ namespace WinForms_CallCenter
 
         private bool ValidarCampos()
         {
-            if (txtUsuario.Text == "") return false;
-            if (txtPass.Text == "") return false;
+            errorProvider1.Clear();
+            if (txtUsuario.Text == "")
+            {
+                errorProvider1.SetError(txtUsuario, "Ingrese un usuario");
+                return false;
+            }
+            if (txtPass.Text == "")
+            {
+                errorProvider1.SetError(txtPass, "Ingrese una contraseña");
+                return false;
+            }
             return true;
         }
 
@@ -110,7 +119,7 @@ namespace WinForms_CallCenter
             }
             else
             {
-                MessageBox.Show("Hay campos vacios", "Vacios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
         }
 
@@ -139,7 +148,7 @@ namespace WinForms_CallCenter
             }
             else
             {
-                MessageBox.Show("Hay campos vacios", "Vacios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
         }
     }

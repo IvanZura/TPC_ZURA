@@ -28,28 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.lblResultadoDNI = new System.Windows.Forms.Label();
             this.txtDNI = new System.Windows.Forms.TextBox();
             this.lblDNI = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
-            this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtpNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboPuesto = new System.Windows.Forms.ComboBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.lblResultadoDNI = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -75,6 +78,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Persona";
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(252, 17);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 12;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // lblResultadoDNI
+            // 
+            this.lblResultadoDNI.AutoSize = true;
+            this.lblResultadoDNI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultadoDNI.Location = new System.Drawing.Point(78, 42);
+            this.lblResultadoDNI.Name = "lblResultadoDNI";
+            this.lblResultadoDNI.Size = new System.Drawing.Size(0, 13);
+            this.lblResultadoDNI.TabIndex = 5;
+            // 
             // txtDNI
             // 
             this.txtDNI.Location = new System.Drawing.Point(81, 19);
@@ -99,6 +121,15 @@
             this.txtNombre.Size = new System.Drawing.Size(158, 20);
             this.txtNombre.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(22, 87);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Apellido";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -107,6 +138,23 @@
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Telefono";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Nombre";
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.Enabled = false;
+            this.txtTelefono.Location = new System.Drawing.Point(311, 90);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(158, 20);
+            this.txtTelefono.TabIndex = 5;
             // 
             // label4
             // 
@@ -117,22 +165,6 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "E-Mail";
             // 
-            // txtTelefono
-            // 
-            this.txtTelefono.Enabled = false;
-            this.txtTelefono.Location = new System.Drawing.Point(311, 90);
-            this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(158, 20);
-            this.txtTelefono.TabIndex = 5;
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Enabled = false;
-            this.txtEmail.Location = new System.Drawing.Point(81, 110);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(158, 20);
-            this.txtEmail.TabIndex = 2;
-            // 
             // dtpNacimiento
             // 
             this.dtpNacimiento.CustomFormat = "yyyy.MM.dd";
@@ -141,6 +173,14 @@
             this.dtpNacimiento.Name = "dtpNacimiento";
             this.dtpNacimiento.Size = new System.Drawing.Size(217, 20);
             this.dtpNacimiento.TabIndex = 4;
+            // 
+            // txtApellido
+            // 
+            this.txtApellido.Enabled = false;
+            this.txtApellido.Location = new System.Drawing.Point(81, 84);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(158, 20);
+            this.txtApellido.TabIndex = 1;
             // 
             // label3
             // 
@@ -151,31 +191,13 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Fecha Nacimiento";
             // 
-            // label2
+            // txtEmail
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 87);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Apellido";
-            // 
-            // txtApellido
-            // 
-            this.txtApellido.Enabled = false;
-            this.txtApellido.Location = new System.Drawing.Point(81, 84);
-            this.txtApellido.Name = "txtApellido";
-            this.txtApellido.Size = new System.Drawing.Size(158, 20);
-            this.txtApellido.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Nombre";
+            this.txtEmail.Enabled = false;
+            this.txtEmail.Location = new System.Drawing.Point(81, 110);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(158, 20);
+            this.txtEmail.TabIndex = 2;
             // 
             // groupBox2
             // 
@@ -229,24 +251,9 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Puesto";
             // 
-            // lblResultadoDNI
+            // errorProvider1
             // 
-            this.lblResultadoDNI.AutoSize = true;
-            this.lblResultadoDNI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblResultadoDNI.Location = new System.Drawing.Point(78, 42);
-            this.lblResultadoDNI.Name = "lblResultadoDNI";
-            this.lblResultadoDNI.Size = new System.Drawing.Size(0, 13);
-            this.lblResultadoDNI.TabIndex = 5;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(252, 17);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 12;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            this.errorProvider1.ContainerControl = this;
             // 
             // EmpleadosAlta
             // 
@@ -262,6 +269,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -288,5 +296,6 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Label lblResultadoDNI;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

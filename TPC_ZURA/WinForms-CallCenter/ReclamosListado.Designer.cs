@@ -30,11 +30,9 @@
         {
             this.dgvReclamos = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtNumero = new System.Windows.Forms.TextBox();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtProblem = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnAlta = new System.Windows.Forms.Button();
             this.btnVer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReclamos)).BeginInit();
@@ -58,12 +56,13 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Listado de reclamos abiertos";
             // 
-            // txtNumero
+            // txtBuscar
             // 
-            this.txtNumero.Location = new System.Drawing.Point(80, 64);
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(100, 20);
-            this.txtNumero.TabIndex = 2;
+            this.txtBuscar.Location = new System.Drawing.Point(158, 64);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(136, 20);
+            this.txtBuscar.TabIndex = 2;
+            this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // label2
             // 
@@ -80,25 +79,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(13, 67);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.Size = new System.Drawing.Size(133, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Por numero";
-            // 
-            // txtProblem
-            // 
-            this.txtProblem.Location = new System.Drawing.Point(295, 64);
-            this.txtProblem.Name = "txtProblem";
-            this.txtProblem.Size = new System.Drawing.Size(100, 20);
-            this.txtProblem.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(203, 67);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Por problematica";
+            this.label3.Text = "Por numero o problematica";
             // 
             // btnAlta
             // 
@@ -127,11 +110,9 @@
             this.ClientSize = new System.Drawing.Size(914, 379);
             this.Controls.Add(this.btnVer);
             this.Controls.Add(this.btnAlta);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtProblem);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtNumero);
+            this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvReclamos);
             this.Name = "ReclamosListado";
@@ -147,11 +128,9 @@
 
         private System.Windows.Forms.DataGridView dgvReclamos;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNumero;
+        private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtProblem;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnAlta;
         private System.Windows.Forms.Button btnVer;
     }

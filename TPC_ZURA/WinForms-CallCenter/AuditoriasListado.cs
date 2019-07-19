@@ -40,5 +40,22 @@ namespace WinForms_CallCenter
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBuscar.Text == "")
+            {
+                dgvAuditorias.DataSource = this.listadoAuditorias;
+            }
+            else
+            {
+                if (txtBuscar.Text.Length >= 0)
+                {
+                    List<Auditorias> lista;
+                    lista = this.listadoAuditorias.FindAll(X => X.Reclamo.id.ToString().Contains(txtBuscar.Text) || X.Accion.Contains(txtBuscar.Text));
+                    dgvAuditorias.DataSource = lista;
+                }
+            }
+        }
     }
 }

@@ -122,9 +122,29 @@ namespace WinForms_CallCenter
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             if (this.VerificarCampos())
             {
-                MessageBox.Show("Algun campo vacio", "Llene todo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (txtDNI.Text == "")
+                {
+                    errorProvider1.SetError(txtDNI, "Ingrese un DNI");
+                }
+                if (txtNombre.Text == "")
+                {
+                    errorProvider1.SetError(txtNombre, "Ingrese un nombre");
+                }
+                if (txtApellido.Text == "")
+                {
+                    errorProvider1.SetError(txtApellido, "Ingrese un apellido");
+                }
+                if (txtEmail.Text == "")
+                {
+                    errorProvider1.SetError(txtEmail, "Ingrese un E-mail");
+                }
+                if (txtTelefono.Text == "")
+                {
+                    errorProvider1.SetError(txtTelefono, "Ingrese un telefono");
+                }
                 return;
             }
             if (!this.VerificaEdad())
@@ -134,7 +154,7 @@ namespace WinForms_CallCenter
             }
             if (!this.verificaMail())
             {
-                MessageBox.Show("Formato de E-mail inválido", "E-mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                errorProvider1.SetError(txtEmail, "Formato invalido");
                 return;
             }
             if (!this.mod)
@@ -189,12 +209,13 @@ namespace WinForms_CallCenter
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            errorProvider1.Clear();
             PersonasNegocio negocioPer = new PersonasNegocio();
             this.local = negocioPer.ExistePersona(txtDNI.Text);
             
             if (txtDNI.Text == "")
             {
-                MessageBox.Show("Dejo vacio el campo", "vacio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                errorProvider1.SetError(txtDNI, "Ingrese un DNI");
                 return;
             }
             EmpleadosNegocio negocioEmp = new EmpleadosNegocio();

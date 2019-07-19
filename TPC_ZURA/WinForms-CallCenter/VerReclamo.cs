@@ -40,6 +40,11 @@ namespace WinForms_CallCenter
             if(op == 0)
             {
                 btnReAbrir.Enabled = false;
+                EmpleadosNegocio negoemp = new EmpleadosNegocio();
+                if (negoemp.PuestoPorEmpleado(this.usuario.id) == 2)
+                {
+                    btnReAsignar.Enabled = false;
+                }
             } else
             {
                 btnCerrar.Enabled = false;
