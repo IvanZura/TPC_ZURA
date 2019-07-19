@@ -43,6 +43,11 @@ namespace WinForms_CallCenter
 
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
             if (txtBuscar.Text == "")
             {
                 dgvAuditorias.DataSource = this.listadoAuditorias;
@@ -52,8 +57,28 @@ namespace WinForms_CallCenter
                 if (txtBuscar.Text.Length >= 0)
                 {
                     List<Auditorias> lista;
-                    lista = this.listadoAuditorias.FindAll(X => X.Reclamo.id.ToString().Contains(txtBuscar.Text) || X.Accion.Contains(txtBuscar.Text));
+                    lista = this.listadoAuditorias.FindAll(X => X.Reclamo.id.ToString().Equals(txtBuscar.Text));
                     dgvAuditorias.DataSource = lista;
+                }
+            }
+        }
+
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                if (txtBuscar.Text == "")
+                {
+                    dgvAuditorias.DataSource = this.listadoAuditorias;
+                }
+                else
+                {
+                    if (txtBuscar.Text.Length >= 0)
+                    {
+                        List<Auditorias> lista;
+                        lista = this.listadoAuditorias.FindAll(X => X.Reclamo.id.ToString().Equals(txtBuscar.Text));
+                        dgvAuditorias.DataSource = lista;
+                    }
                 }
             }
         }
